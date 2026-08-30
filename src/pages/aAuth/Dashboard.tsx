@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, type ReactNode, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode, type CSSProperties } from "react";
 import "../../styles/Home.css";
 import "../../styles/aAtuh/Dashboard.css";
 import { ImInstagram } from "react-icons/im";
@@ -215,28 +215,6 @@ function useOutsideClose<T extends HTMLElement>(onClose: () => void) {
     return () => document.removeEventListener("mousedown", handle);
   }, [onClose]);
   return ref;
-}
-
-/** contagem regressiva até o fim do dia, usada na promoção */
-function useCountdownToMidnight() {
-  const calc = () => {
-    const now = new Date();
-    const end = new Date(now);
-    end.setHours(23, 59, 59, 999);
-    const diff = Math.max(0, end.getTime() - now.getTime());
-    return {
-      h: Math.floor(diff / 3600000),
-      m: Math.floor((diff % 3600000) / 60000),
-      s: Math.floor((diff % 60000) / 1000),
-    };
-  };
-  const [time, setTime] = useState(calc);
-  useEffect(() => {
-    const id = setInterval(() => setTime(calc()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${pad(time.h)}:${pad(time.m)}:${pad(time.s)}`;
 }
 
 /* ============ header: menu hambúrguer flutuante ============ */

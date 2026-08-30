@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { FaCheckCircle, FaTimesCircle, FaTimes } from "react-icons/fa";
 import "../styles/components/ResponseCard.css";
 
