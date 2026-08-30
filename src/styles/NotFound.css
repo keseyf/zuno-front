@@ -1,0 +1,245 @@
+/* ===== Shell ===== */
+.zuno-404-page {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+/* orbs mais fortes que o padrão pra essa página respirar mais */
+.zuno-404-orb-boost {
+  opacity: 0.7;
+  filter: blur(90px);
+}
+
+/* ===== Ícones flutuando pela tela ===== */
+.zuno-404-float-icons {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.zuno-404-icon {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.18;
+  filter: grayscale(0.3);
+  animation: zuno-404-drift 9s ease-in-out infinite;
+}
+
+.zuno-404-icon-1 { top: 12%; left: 10%; animation-duration: 8s; }
+.zuno-404-icon-2 { top: 20%; right: 12%; animation-duration: 10s; animation-delay: 0.6s; }
+.zuno-404-icon-3 { bottom: 18%; left: 15%; animation-duration: 11s; animation-delay: 1.2s; }
+.zuno-404-icon-4 { bottom: 14%; right: 16%; animation-duration: 9s; animation-delay: 0.3s; }
+.zuno-404-icon-5 { top: 45%; left: 6%; animation-duration: 12s; animation-delay: 1.8s; font-size: 16px; }
+.zuno-404-icon-6 { top: 50%; right: 7%; animation-duration: 10.5s; animation-delay: 0.9s; font-size: 18px; }
+
+@keyframes zuno-404-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(14px, -18px) rotate(6deg); }
+  50% { transform: translate(-10px, 10px) rotate(-4deg); }
+  75% { transform: translate(10px, 16px) rotate(3deg); }
+}
+
+/* ===== Content ===== */
+.zuno-404-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zuno-404-eyebrow {
+  margin-bottom: 28px;
+  animation: zuno-fade-down 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ===== Número gigante ===== */
+.zuno-404-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(96px, 18vw, 200px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.zuno-404-digit {
+  position: relative;
+  background: linear-gradient(135deg, var(--ink), var(--ink-dim));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* dígitos "4" com efeito glitch/RGB split */
+.zuno-404-digit-glitch {
+  animation: zuno-404-glitch 5s ease-in-out infinite;
+}
+
+.zuno-404-digit-delay {
+  animation-delay: 1.4s;
+}
+
+@keyframes zuno-404-glitch {
+  0%, 92%, 100% {
+    text-shadow: none;
+    transform: translate(0, 0);
+  }
+  93% {
+    text-shadow: -3px 0 var(--pink), 3px 0 var(--purple);
+    transform: translate(-2px, 1px);
+  }
+  94% {
+    text-shadow: 3px 0 var(--pink), -3px 0 var(--purple);
+    transform: translate(2px, -1px);
+  }
+  95% {
+    text-shadow: -2px 0 var(--purple), 2px 0 var(--pink);
+    transform: translate(-1px, 0);
+  }
+  96% {
+    text-shadow: none;
+    transform: translate(0, 0);
+  }
+}
+
+/* zero vira um "anel de status" pulsante */
+.zuno-404-digit-zero {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zuno-404-zero-ring {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  border: 3px dashed var(--pink);
+  opacity: 0.55;
+  animation: zuno-404-spin 12s linear infinite;
+}
+
+.zuno-404-zero-ring::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 46, 204, 0.25);
+  animation: zuno-pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes zuno-404-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Título / texto ===== */
+.zuno-404-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.zuno-404-p {
+  font-size: 15px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  max-width: 440px;
+  margin-bottom: 32px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.zuno-404-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 34px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+/* ===== Faixa de "código de erro", ecoando o redeem-code da landing ===== */
+.zuno-404-code {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 20px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.zuno-404-code b {
+  color: var(--pink);
+}
+
+.zuno-404-code::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 46, 204, 0.15), transparent);
+  animation: zuno-scan-move-404 3.4s ease-in-out infinite;
+}
+
+@keyframes zuno-scan-move-404 {
+  0% { left: -60%; }
+  100% { left: 130%; }
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 520px) {
+  .zuno-404-number {
+    gap: 2px;
+  }
+  .zuno-404-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .zuno-404-actions .zuno-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .zuno-404-icon {
+    font-size: 18px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zuno-404-digit-glitch,
+  .zuno-404-zero-ring,
+  .zuno-404-icon,
+  .zuno-404-code::after {
+    animation: none !important;
+  }
+}

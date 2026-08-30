@@ -1,0 +1,371 @@
+.zuno-aff-page {
+  overflow-x: hidden;
+}
+
+/* ===== back link ===== */
+.zuno-aff-back {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  margin: 24px 0 0 24px;
+}
+
+/* ===== ícones flutuando ===== */
+.zuno-aff-float-icons {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.zuno-aff-icon {
+  position: absolute;
+  font-size: 26px;
+  opacity: 0.16;
+  animation: zuno-aff-drift 10s ease-in-out infinite;
+}
+
+.zuno-aff-icon-1 { top: 15%; left: 8%; animation-duration: 9s; }
+.zuno-aff-icon-2 { top: 25%; right: 10%; animation-duration: 11s; animation-delay: 0.5s; }
+.zuno-aff-icon-3 { bottom: 30%; left: 6%; animation-duration: 12s; animation-delay: 1.1s; font-size: 18px; }
+.zuno-aff-icon-4 { bottom: 20%; right: 8%; animation-duration: 10s; animation-delay: 0.3s; }
+.zuno-aff-icon-5 { top: 50%; left: 3%; animation-duration: 13s; animation-delay: 1.6s; font-size: 30px; }
+.zuno-aff-icon-6 { top: 60%; right: 4%; animation-duration: 9.5s; animation-delay: 0.8s; font-size: 16px; }
+
+@keyframes zuno-aff-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(16px, -20px) rotate(8deg); }
+  50% { transform: translate(-12px, 14px) rotate(-6deg); }
+  75% { transform: translate(12px, 18px) rotate(4deg); }
+}
+
+/* ===== HERO ===== */
+.zuno-aff-hero {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zuno-aff-eyebrow {
+  margin: 0 auto 24px;
+}
+
+.zuno-aff-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.zuno-aff-commission {
+  display: inline-block;
+}
+
+.zuno-aff-p {
+  font-size: 16px;
+  color: var(--ink-dim);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+.zuno-aff-cta {
+  font-size: 15px;
+  padding: 14px 28px;
+  margin-bottom: 48px;
+  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
+}
+
+/* ===== badge gigante 20% ===== */
+.zuno-aff-badge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 220px;
+  animation: zuno-card-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both, zuno-card-float 5s ease-in-out infinite 1.4s;
+}
+
+.zuno-aff-badge-number {
+  position: relative;
+  z-index: 2;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--pink), #ff8bde);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(255, 46, 204, 0.4);
+}
+
+.zuno-aff-badge-label {
+  position: relative;
+  z-index: 2;
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  text-align: center;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.zuno-aff-badge-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed var(--pink);
+  opacity: 0.5;
+  animation: zuno-404-spin 14s linear infinite;
+}
+
+.zuno-aff-badge-ring::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 47, 224, 0.4);
+}
+
+.zuno-aff-badge-ring::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 46, 204, 0.18), transparent 70%);
+  animation: zuno-pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes zuno-404-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Perks grid ===== */
+.zuno-aff-perks-section {
+  padding-top: 0;
+  padding-bottom: 50px;
+}
+
+.zuno-aff-perks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .zuno-aff-perks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.zuno-aff-perk-card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: zuno-fade-up-blur 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+  transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.zuno-aff-perk-card:hover {
+  border-color: var(--pink);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 16px 36px rgba(255, 46, 204, 0.25);
+}
+
+.zuno-aff-perk-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.zuno-aff-perk-value {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+.zuno-aff-perk-label {
+  font-size: 12px;
+  color: var(--ink-mute);
+  line-height: 1.4;
+}
+
+/* ===== Como funciona (reaproveita zuno-how, ajustes leves) ===== */
+.zuno-aff-how {
+  position: relative;
+  z-index: 2;
+}
+
+.zuno-aff-step-card {
+  opacity: 0;
+  animation: zuno-fade-up-blur 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.zuno-aff-step-card:nth-child(2) { animation-delay: 0.1s; }
+.zuno-aff-step-card:nth-child(3) { animation-delay: 0.2s; }
+.zuno-aff-step-card:nth-child(4) { animation-delay: 0.3s; }
+
+/* ===== FAQ rápido ===== */
+.zuno-aff-faq-section {
+  position: relative;
+  z-index: 2;
+}
+
+.zuno-aff-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .zuno-aff-faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.zuno-aff-faq-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.zuno-aff-faq-card:hover {
+  border-color: var(--purple);
+  transform: translateY(-3px);
+}
+
+.zuno-aff-faq-card b {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.zuno-aff-faq-card span {
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.55;
+}
+
+/* ===== MODAL ===== */
+.zuno-aff-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(9, 5, 15, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: zuno-aff-overlay-in 0.25s ease both;
+}
+
+@keyframes zuno-aff-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.zuno-aff-modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 40px 32px 32px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(139, 47, 224, 0.3), 0 0 100px rgba(255, 46, 204, 0.1);
+  animation: zuno-aff-modal-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes zuno-aff-modal-in {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.zuno-aff-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg-alt);
+  color: var(--ink-mute);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.zuno-aff-modal-close:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+.zuno-aff-modal-icon {
+  display: block;
+  font-size: 44px;
+  margin-bottom: 16px;
+  animation: zuno-card-float 3s ease-in-out infinite;
+}
+
+.zuno-aff-modal h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.zuno-aff-modal p {
+  font-size: 14px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.zuno-aff-modal-sub {
+  color: var(--ink-mute) !important;
+  font-size: 13px !important;
+  margin-bottom: 22px !important;
+}
+
+.zuno-aff-modal-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zuno-aff-icon,
+  .zuno-aff-badge-ring {
+    animation: none !important;
+  }
+}

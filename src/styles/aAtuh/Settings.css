@@ -1,0 +1,291 @@
+/* ============ main ============ */
+.zuno-settings-main {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 44px 20px calc(110px + env(safe-area-inset-bottom));
+}
+
+.zuno-settings-eyebrow {
+  margin: 0 0 20px;
+  animation: zuno-fade-down 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.zuno-settings-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(24px, 4.2vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  animation: zuno-fade-up-blur 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.zuno-settings-subtitle {
+  font-size: 14px;
+  color: var(--ink-mute);
+  margin-bottom: 32px;
+  animation: zuno-fade-up-blur 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ============ cards ============ */
+.zuno-settings-card {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: zuno-fade-up-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.zuno-settings-card:nth-of-type(1) { animation-delay: 0.28s; }
+.zuno-settings-card:nth-of-type(2) { animation-delay: 0.34s; }
+.zuno-settings-card:nth-of-type(3) { animation-delay: 0.4s; }
+.zuno-settings-card:nth-of-type(4) { animation-delay: 0.46s; }
+
+.zuno-settings-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.zuno-settings-card-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: var(--bg-alt);
+  color: var(--pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.zuno-settings-card-head b {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15.5px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.zuno-settings-card-head span {
+  font-size: 12.5px;
+  color: var(--ink-mute);
+}
+
+/* ============ linha de setting (label + controle) ============ */
+.zuno-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.zuno-settings-row + .zuno-settings-row {
+  border-top: 1px solid var(--line);
+}
+
+.zuno-settings-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.zuno-settings-row-text b {
+  font-size: 13.5px;
+  color: var(--ink);
+}
+
+.zuno-settings-row-text span {
+  font-size: 12px;
+  color: var(--ink-mute);
+  line-height: 1.4;
+}
+
+/* ============ toggle switch ============ */
+.zuno-toggle {
+  flex-shrink: 0;
+  position: relative;
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg-alt);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  padding: 0;
+}
+
+.zuno-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ink-mute);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease;
+}
+
+.zuno-toggle-on {
+  background: linear-gradient(135deg, var(--pink), #ff6de8);
+  border-color: transparent;
+}
+
+.zuno-toggle-on .zuno-toggle-knob {
+  transform: translateX(20px);
+  background: var(--ink);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ============ campos de senha ============ */
+.zuno-settings-field {
+  margin-bottom: 16px;
+}
+
+.zuno-settings-field:last-of-type {
+  margin-bottom: 20px;
+}
+
+.zuno-settings-save {
+  width: 100%;
+  justify-content: center;
+}
+
+.zuno-settings-save:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.zuno-settings-save:disabled::before {
+  display: none;
+}
+
+/* ============ zona de risco ============ */
+.zuno-settings-danger {
+  border-color: rgba(255, 107, 125, 0.25);
+}
+
+.zuno-settings-danger-icon {
+  background: rgba(255, 107, 125, 0.12);
+  color: #ff6b7d;
+}
+
+.zuno-settings-danger .zuno-settings-card-head {
+  border-bottom-color: rgba(255, 107, 125, 0.18);
+}
+
+.zuno-settings-danger-btn {
+  flex-shrink: 0;
+  background: rgba(255, 107, 125, 0.1);
+  border: 1px solid rgba(255, 107, 125, 0.35);
+  color: #ff8b98;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.zuno-settings-danger-btn:hover {
+  background: rgba(255, 107, 125, 0.18);
+  border-color: #ff6b7d;
+  transform: translateY(-2px);
+}
+
+.zuno-settings-danger-btn-solid {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ============ modal de confirmação ============ */
+.zuno-settings-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(9, 5, 15, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: zuno-aff-overlay-in 0.25s ease both;
+}
+
+@keyframes zuno-aff-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.zuno-settings-modal {
+  width: 100%;
+  max-width: 380px;
+  background: var(--card);
+  border: 1px solid rgba(255, 107, 125, 0.3);
+  border-radius: 22px;
+  padding: 36px 30px 30px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(255, 107, 125, 0.15), 0 0 100px rgba(139, 47, 224, 0.1);
+  animation: zuno-aff-modal-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes zuno-aff-modal-in {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.zuno-settings-modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 107, 125, 0.12);
+  color: #ff6b7d;
+  font-size: 20px;
+  margin: 0 auto 16px;
+}
+
+.zuno-settings-modal h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.zuno-settings-modal p {
+  font-size: 13.5px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.zuno-settings-modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.zuno-settings-modal-actions .zuno-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .zuno-settings-row {
+    flex-wrap: wrap;
+  }
+}

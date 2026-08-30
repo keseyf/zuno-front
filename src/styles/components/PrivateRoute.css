@@ -1,0 +1,40 @@
+.zuno-auth-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.zuno-auth-loading-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.zuno-auth-loading-content p {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-dim);
+  letter-spacing: 0.02em;
+}
+
+.zuno-auth-spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  border-top-color: var(--pink);
+  border-right-color: var(--purple);
+  animation: zuno-spinner-spin 0.9s linear infinite;
+  box-shadow: 0 0 24px rgba(255, 46, 204, 0.25);
+}
+
+@keyframes zuno-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
