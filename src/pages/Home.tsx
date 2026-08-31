@@ -12,7 +12,7 @@ const categories = [
 ];
 
 const products = [
-  { image: "/produtos/instagram.png", name: "1000 Seguidores Instagram", price: "R$ 14,90", oldPrice: "R$ 19,90", sold: 82, badge: "Mais vendido" },
+  { image: "/produtos/instagram.png", name: "1000 Seguidores Instagram", price: "R$ 9.99", oldPrice: "R$ 19,90", sold: 82, badge: "Mais vendido" },
   { image: "/produtos/tiktok.png", name: "5000 Views TikTok", price: "R$ 9,90", oldPrice: null, sold: 64, badge: null },
   { image: "/produtos/youtube.png", name: "500 Inscritos YouTube", price: "R$ 29,90", oldPrice: "R$ 39,90", sold: 47, badge: "Oferta" },
   { image: "/produtos/curtidas.png", name: "1000 Curtidas Instagram", price: "R$ 7,90", oldPrice: null, sold: 91, badge: "Mais vendido" },
@@ -170,7 +170,7 @@ export default function ZunoStore() {
       <section className="zuno-hero">
         <div>
           <div className="zuno-eyebrow">
-            <span className="zuno-dot" /> Entrega automática, 24h por dia
+            <span className="zuno-dot" /> Entrega Rápida, 24h por dia!
           </div>
           <h1 className="zuno-h1">
             Seguidores, views<br /> e curtidas{" "}
@@ -197,7 +197,7 @@ export default function ZunoStore() {
               <div className="zuno-redeem-tag">Pedido em andamento</div>
               <div className="zuno-redeem-title">1000 Seguidores Instagram</div>
             </div>
-            <div className="zuno-redeem-price">R$ 14,90</div>
+            <div className="zuno-redeem-price">R$ 9,99</div>
           </div>
           <div className="zuno-redeem-code">
             <span>@seu_perfil <b>+327</b> hoje</span>

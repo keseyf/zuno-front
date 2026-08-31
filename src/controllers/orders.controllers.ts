@@ -15,9 +15,7 @@ export async function getMyOrders() {
 export async function createOrder(data: {
   productId: string | null;
   serviceId: string | null;
-  quantity: number;
   url: string
-
 }) {
   try {
     if (data.productId ===null || data.serviceId===null ){

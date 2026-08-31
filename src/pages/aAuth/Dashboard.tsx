@@ -42,11 +42,13 @@ interface ApiProduct {
 
 interface ApiService {
   id: string;
+  replacement: boolean;
+  service_Id: number;
   productId: string;
   platform: string;
-  serviceType: string;
-  minQuantity: number;
-  maxQuantity: number;
+  serviceName: string;
+  quantity: number;
+
   price: number | string; // requer a migration que adiciona price em Service
 }
 
@@ -54,8 +56,7 @@ interface ServiceOption {
   id: string;
   label: string;
   price: number; // preço por 1000
-  minQuantity: number;
-  maxQuantity: number;
+  quantity: number;
 }
 
 interface NetworkOption {
@@ -84,14 +85,11 @@ interface UserProfile {
 
 interface OrderData {
   id: string;
-  product: string;
-  quantity: number;
-  url: string;
+  serviceName: string;
+  serviceDesc?: string | null;
   value: number;
   createdAt: string;
 }
-
-const QUANTITY_CHIPS = [500, 1000, 2000, 5000, 10000];
 
 const formatBRL = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -166,10 +164,10 @@ function buildNetworksFromProducts(products: ApiProduct[]): NetworkOption[] {
 function mapApiServices(services: ApiService[]): ServiceOption[] {
   return services.map((s) => ({
     id: s.id,
-    label: capitalize(s.serviceType),
+    label: capitalize(s.serviceName),
     price: Number(s.price),
-    minQuantity: s.minQuantity,
-    maxQuantity: s.maxQuantity,
+    replacement: s.replacement,
+    quantity: s.quantity,
   }));
 }
 
@@ -380,10 +378,10 @@ function ServiceSelect({
               <span className="zuno-select-list-main">
                 <span className="zuno-select-list-label">{s.label}</span>
                 <span className="zuno-select-list-quality">
-                  {s.minQuantity.toLocaleString("pt-BR")}–{s.maxQuantity.toLocaleString("pt-BR")} un.
+                  {s.quantity.toLocaleString("pt-BR")} un(s).
                 </span>
               </span>
-              <span className="zuno-select-list-price">{formatBRL(s.price)}<small>/1k</small></span>
+              <span className="zuno-select-list-price">{formatBRL(s.price)}</span>
             </button>
           ))}
         </div>
@@ -414,8 +412,11 @@ function SpendingChart({ days }: { days: { label: string; value: number }[] }) {
             <span className="zuno-chart-value">{formatBRL(d.value)}</span>
             <div className="zuno-chart-track">
               <span
-                className="zuno-chart-bar"
-                style={{ height: `${(d.value / max) * 100}%`, animationDelay: `${i * 80}ms` } as CSSProperties}
+                className={`zuno-chart-bar ${d.value === 0 ? "zuno-chart-bar-empty" : ""}`}
+                style={{
+                  height: `${(d.value / max) * 100}%`,
+                  animationDelay: `${i * 80}ms`,
+                } as CSSProperties}
               />
             </div>
             <span className="zuno-chart-label">{d.label}</span>
@@ -445,7 +446,6 @@ export default function Dashboard() {
   const [serviceError, setServiceError] = useState<string | null>(null);
 
   const [link, setLink] = useState("");
-  const [quantity, setQuantity] = useState("");
 
   const [submitOrderLoading, setSubmitOrderLoading] = useState(false);
 
@@ -535,11 +535,7 @@ export default function Dashboard() {
     [orders]
   );
 
-  const price = useMemo(() => {
-    if (!service) return 0;
-    const qty = Number(quantity) || 0;
-    return (qty / 100) * service.price;
-  }, [service, quantity]);
+  const price = service ? service.price : 0;
 
   const [bump, setBump] = useState(false);
   const firstRender = useRef(true);
@@ -561,9 +557,7 @@ export default function Dashboard() {
   const canSubmit = Boolean(
     network &&
     service &&
-    link.trim() &&
-    Number(quantity) >= (service?.minQuantity ?? 1) &&
-    Number(quantity) <= (service?.maxQuantity ?? Infinity)
+    link.trim()
   );
 
 
@@ -715,8 +709,7 @@ export default function Dashboard() {
                   <p className="zuno-dash-info-hint">{serviceError}</p>
                 ) : service ? (
                   <div className="zuno-dash-info-tags">
-                    <span className="zuno-dash-info-tag">⬇️ Mínimo: {service.minQuantity.toLocaleString("pt-BR")}</span>
-                    <span className="zuno-dash-info-tag">⬆️ Máximo: {service.maxQuantity.toLocaleString("pt-BR")}</span>
+                    <span className="zuno-dash-info-tag">🔋 Quantidade: {service.quantity.toLocaleString("pt-BR")}</span>
                   </div>
                 ) : (
                   <p className="zuno-dash-info-hint">
@@ -743,34 +736,6 @@ export default function Dashboard() {
                 />
               </div>
 
-              {/* quantidade */}
-              <div className="zuno-dash-field zuno-dash-field-full">
-                <label className="zuno-dash-label" htmlFor="dash-qty">Quantidade</label>
-                <input
-                  id="dash-qty"
-                  type="number"
-                  min={service?.minQuantity ?? 100}
-                  max={service?.maxQuantity ?? 100000}
-                  step={100}
-                  className="zuno-dash-input"
-                  placeholder="Ex: 1000"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-                <div className="zuno-dash-chip-row">
-                  {QUANTITY_CHIPS.map((q) => (
-                    <button
-                      type="button"
-                      key={q}
-                      className={`zuno-dash-chip ${Number(quantity) === q ? "zuno-dash-chip-active" : ""}`}
-                      onClick={() => setQuantity(String(q))}
-                    >
-                      {q.toLocaleString("pt-BR")}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               {/* valor */}
               <div className="zuno-dash-summary zuno-dash-field-full">
                 <div className="zuno-dash-summary-scan" />
@@ -782,26 +747,26 @@ export default function Dashboard() {
 
               <button
                 type="button"
-                className={`zuno-btn zuno-btn-pink zuno-dash-submit zuno-dash-field-full ${canSubmit ? "zuno-dash-submit-ready" : ""} ${submitOrderLoading ?"zuno-dash-submit-processing" : ""}`}
+                className={`zuno-btn zuno-btn-pink zuno-dash-submit zuno-dash-field-full ${canSubmit ? "zuno-dash-submit-ready" : ""} ${submitOrderLoading ? "zuno-dash-submit-processing" : ""}`}
                 disabled={!canSubmit}
                 onClick={async () => {
                   setSubmitOrderLoading(true)
                   const response = await createOrder({
                     productId: network?.id ?? null,
                     serviceId: service?.id ?? null,
-                    quantity: Number(quantity),
                     url: link,
                   });
                   setResponse(response);
                   setSubmitOrderLoading(false)
                 }}
               >
-                {submitOrderLoading ? "Criando pedido" :"Fazer pedido"}
+                {submitOrderLoading ? "Criando pedido" : "Fazer pedido"}
               </button>
             </div>
           )}
         </div>
 
+        {/* GRÁFICO + PEDIDOS RECENTES — dados reais */}
         {/* GRÁFICO + PEDIDOS RECENTES — dados reais */}
         <div className="zuno-dash-row">
           <SpendingChart days={weeklySpending} />
@@ -826,7 +791,8 @@ export default function Dashboard() {
                       <FaShoppingBag />
                     </span>
                     <div className="zuno-dash-recent-info">
-                      <b>{o.quantity} · {o.product}</b>
+                      <b title={o.serviceName}>{o.serviceName}</b>
+                      {o.serviceDesc && <span title={o.serviceDesc}>{o.serviceDesc}</span>}
                       <span>{formatDate(o.createdAt)}</span>
                     </div>
                     <span className="zuno-dash-recent-value">{formatBRL(o.value)}</span>

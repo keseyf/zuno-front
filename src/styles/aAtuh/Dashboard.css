@@ -440,7 +440,7 @@
 /* ============ linha: gráfico + pedidos recentes ============ */
 .zuno-dash-row {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1fr;   /* era: 1.3fr 1fr */
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -450,6 +450,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 
 .zuno-dash-card {
   position: relative;
@@ -489,7 +490,8 @@
 /* ============ gráfico de barras ============ */
 .zuno-chart {
   display: flex;
-  align-items: flex-end;
+  /* remova esta linha: */
+  /* align-items: flex-end; */
   justify-content: space-between;
   gap: 10px;
   height: 150px;
@@ -513,17 +515,20 @@
 .zuno-chart-track {
   flex: 1;
   width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  position: relative; /* adicionar */
+  /* pode remover display/align-items/justify-content daqui, não são mais necessários */
 }
 
 .zuno-chart-bar {
-  width: 60%;
+  position: absolute;      /* adicionar */
+  bottom: 0;                /* adicionar — trava embaixo, sempre */
+  left: 50%;                /* adicionar */
+  transform: translateX(-50%) scaleY(0); /* mudar */
+  width: 100%;
   max-width: 22px;
+  min-height: 6px;
   border-radius: 6px 6px 2px 2px;
   background: linear-gradient(180deg, var(--pink), var(--purple));
-  transform: scaleY(0);
   transform-origin: bottom;
   animation: zuno-chart-grow 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.4s;
@@ -531,7 +536,13 @@
 }
 
 @keyframes zuno-chart-grow {
-  to { transform: scaleY(1); }
+  to { transform: translateX(-50%) scaleY(1); }
+}
+
+.zuno-chart-bar-empty {
+  background: var(--line);
+  box-shadow: none;
+  border-radius: 3px;
 }
 
 .zuno-chart-bar:hover {
@@ -594,11 +605,19 @@
 .zuno-dash-recent-info b {
   font-size: 13px;
   color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .zuno-dash-recent-info span {
   font-size: 11px;
   color: var(--ink-mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .zuno-dash-recent-value {
