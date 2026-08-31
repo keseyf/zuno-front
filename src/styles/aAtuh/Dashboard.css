@@ -1,5 +1,16 @@
 .zuno-dash-page {
   padding-bottom: 0;
+
+  /* tema mais escuro, mantendo os tons roxo/rosa nas bordas e glows */
+  --card: rgba(14, 8, 24, 0.92);
+  --bg-alt: rgba(10, 6, 18, 0.88);
+  --line: rgba(139, 47, 224, 0.18);
+
+  background:
+    radial-gradient(1100px 700px at 12% -10%, rgba(139, 47, 224, 0.14), transparent 60%),
+    radial-gradient(900px 650px at 100% 8%, rgba(255, 46, 204, 0.1), transparent 55%),
+    #07040d;
+  min-height: 100vh;
 }
 
 /* ============ header ============ */
@@ -7,10 +18,9 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(18, 11, 30, 0.7);
+  background: rgba(10, 6, 16, 0.82);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
-  animation: zuno-fade-down 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zuno-dash-header-inner {
@@ -47,7 +57,7 @@
   color: var(--ink-dim);
   font-size: 15px;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .zuno-dash-menu-btn:hover {
@@ -58,24 +68,17 @@
 .zuno-dash-menu-btn-open {
   border-color: var(--pink);
   color: var(--pink);
-  transform: rotate(90deg);
 }
 
 /* ============ painéis flutuantes (selects + menu) ============ */
 .zuno-floating-panel {
   position: absolute;
-  z-index: 40;
-  background: rgba(30, 19, 48, 0.92);
+  z-index: 999;
+  background: rgba(16, 9, 26, 0.97);
   backdrop-filter: blur(18px);
   border: 1px solid var(--line);
   border-radius: 16px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 46, 204, 0.1), 0 0 40px rgba(139, 47, 224, 0.2);
-  animation: zuno-float-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes zuno-float-in {
-  from { opacity: 0; transform: translateY(-10px) scale(0.96); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 46, 204, 0.08);
 }
 
 .zuno-floating-arrow {
@@ -84,7 +87,7 @@
   left: 24px;
   width: 12px;
   height: 12px;
-  background: rgba(30, 19, 48, 0.92);
+  background: rgba(16, 9, 26, 0.97);
   border-left: 1px solid var(--line);
   border-top: 1px solid var(--line);
   transform: rotate(45deg);
@@ -165,11 +168,6 @@
   margin-bottom: 16px;
 }
 
-.zuno-dash-eyebrow {
-  margin: 0;
-  animation: zuno-fade-down 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
-}
-
 .zuno-dash-title {
   font-family: "Space Grotesk", sans-serif;
   font-size: clamp(26px, 4.5vw, 38px);
@@ -177,20 +175,18 @@
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: 8px;
-  animation: zuno-fade-up-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
 .zuno-dash-subtitle {
   font-size: 14.5px;
   color: var(--ink-mute);
   margin-bottom: 32px;
-  animation: zuno-fade-up-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
 }
 
 /* ============ stats ============ */
 .zuno-dash-stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -211,38 +207,26 @@
   flex-direction: column;
   gap: 6px;
   overflow: hidden;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: zuno-fade-up-blur 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: var(--d, 0ms);
-  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  transition: border-color 0.2s ease;
 }
 
 .zuno-dash-stat-card:hover {
   border-color: var(--purple);
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(139, 47, 224, 0.25);
 }
 
 .zuno-dash-stat-highlight {
-  border-color: rgba(255, 46, 204, 0.35);
-  background: linear-gradient(135deg, rgba(255, 46, 204, 0.1), rgba(139, 47, 224, 0.08));
+  border-color: rgba(255, 46, 204, 0.3);
+  background: linear-gradient(135deg, rgba(255, 46, 204, 0.08), rgba(139, 47, 224, 0.06));
 }
 
 .zuno-dash-stat-highlight:hover {
   border-color: var(--pink);
-  box-shadow: 0 14px 30px rgba(255, 46, 204, 0.3);
 }
 
 .zuno-dash-stat-icon {
   font-size: 16px;
   color: var(--pink);
   margin-bottom: 4px;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.zuno-dash-stat-card:hover .zuno-dash-stat-icon {
-  transform: scale(1.2) rotate(-8deg);
 }
 
 .zuno-dash-stat-value {
@@ -262,113 +246,29 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(24, 14, 38, 0.92), rgba(20, 12, 32, 0.96));
-  border: 1px solid rgba(255, 46, 204, 0.25);
+  background: linear-gradient(135deg, rgba(16, 9, 24, 0.94), rgba(12, 7, 18, 0.97));
+  border: 1px solid rgba(255, 46, 204, 0.2);
   border-radius: 20px;
   padding: 26px 30px;
   margin-bottom: 24px;
   overflow: hidden;
   isolation: isolate;
-  opacity: 0;
-  animation: zuno-fade-up-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both,
-    zuno-welcome-glow-pulse 5s ease-in-out infinite 1.2s;
 }
 
-/* borda de gradiente animada, igual o card de pedido */
-.zuno-dash-welcome::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 20px;
-  padding: 1.5px;
-  background: linear-gradient(135deg, var(--pink), transparent 40%, var(--purple), transparent 75%, var(--pink));
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.8;
-  pointer-events: none;
-  z-index: 0;
-  animation: zuno-order-border-shift 6s linear infinite;
-}
-
-@keyframes zuno-welcome-glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 rgba(255, 46, 204, 0); }
-  50% { box-shadow: 0 0 50px rgba(255, 46, 204, 0.22), 0 0 90px rgba(139, 47, 224, 0.15); }
-}
-
-/* fundo decorativo, atrás de tudo (z-index 0), sem brigar com o texto */
 .zuno-dash-welcome-glow {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(420px 240px at 8% 10%, rgba(255, 46, 204, 0.22), transparent 55%),
-    radial-gradient(360px 220px at 98% 100%, rgba(139, 47, 224, 0.26), transparent 55%);
-  animation: zuno-glow-drift 9s ease-in-out infinite alternate;
+  background: radial-gradient(420px 240px at 8% 10%, rgba(255, 46, 204, 0.16), transparent 55%),
+    radial-gradient(360px 220px at 98% 100%, rgba(139, 47, 224, 0.2), transparent 55%);
 }
 
-/* shine passando de leve por cima, só decorativo */
-.zuno-dash-welcome-shine {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.06) 45%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.06) 55%, transparent 70%);
-  background-size: 250% 100%;
-  animation: zuno-welcome-shine-sweep 5s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes zuno-welcome-shine-sweep {
-  0% { background-position: 200% 0; }
-  50%, 100% { background-position: -50% 0; }
-}
-
-/* partículas flutuantes */
-.zuno-dash-welcome-particles {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.zuno-dash-welcome-particles span {
-  position: absolute;
-  bottom: -10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--pink);
-  opacity: 0.6;
-  box-shadow: 0 0 8px var(--pink);
-  animation: zuno-particle-float linear infinite;
-}
-
-.zuno-dash-welcome-particles span:nth-child(1) { left: 6%; animation-duration: 7s; animation-delay: 0s; }
-.zuno-dash-welcome-particles span:nth-child(2) { left: 16%; animation-duration: 9s; animation-delay: 1.2s; background: var(--purple); width: 4px; height: 4px; }
-.zuno-dash-welcome-particles span:nth-child(3) { left: 30%; animation-duration: 6.5s; animation-delay: 2.4s; }
-.zuno-dash-welcome-particles span:nth-child(4) { left: 48%; animation-duration: 8.2s; animation-delay: 0.6s; background: var(--purple); }
-.zuno-dash-welcome-particles span:nth-child(5) { left: 66%; animation-duration: 7.6s; animation-delay: 1.8s; width: 5px; height: 5px; }
-.zuno-dash-welcome-particles span:nth-child(6) { left: 79%; animation-duration: 9.5s; animation-delay: 3s; background: var(--purple); }
-.zuno-dash-welcome-particles span:nth-child(7) { left: 90%; animation-duration: 6.8s; animation-delay: 2s; }
-.zuno-dash-welcome-particles span:nth-child(8) { left: 97%; animation-duration: 8.8s; animation-delay: 0.9s; width: 4px; height: 4px; background: var(--purple); }
-
-@keyframes zuno-particle-float {
-  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-  10% { opacity: 0.65; }
-  90% { opacity: 0.35; }
-  100% { transform: translateY(-140px) translateX(12px) scale(0.4); opacity: 0; }
-}
-
-/* painel de vidro atrás do texto — resolve o contraste */
 .zuno-dash-welcome-content {
   position: relative;
   z-index: 2;
   display: flex;
   align-items: center;
   gap: 20px;
-  background: rgba(10, 6, 18, 0.35);
-  backdrop-filter: blur(6px);
   border-radius: 16px;
   padding: 6px 10px;
 }
@@ -376,19 +276,7 @@
 .zuno-dash-welcome-wave {
   font-size: 34px;
   flex-shrink: 0;
-  transform-origin: 70% 70%;
-  animation: zuno-wave 2.4s ease-in-out infinite;
-  animation-delay: 0.6s;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
-}
-
-@keyframes zuno-wave {
-  0%, 60%, 100% { transform: rotate(0deg); }
-  10% { transform: rotate(16deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(16deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
 }
 
 .zuno-dash-welcome-greeting {
@@ -398,7 +286,6 @@
   letter-spacing: 0.02em;
   color: #ff6de8;
   margin-bottom: 6px;
-  text-shadow: 0 1px 8px rgba(255, 46, 204, 0.5);
 }
 
 .zuno-dash-welcome-title {
@@ -408,21 +295,11 @@
   margin-bottom: 8px;
   max-width: 480px;
   color: #ffffff;
-  background: linear-gradient(90deg, #ffffff 0%, #ff9df0 25%, #c99dff 50%, #ffffff 75%);
-  background-size: 300% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: zuno-text-shimmer 6s linear infinite;
-}
-
-@keyframes zuno-text-shimmer {
-  to { background-position: 300% center; }
 }
 
 .zuno-dash-welcome-sub {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 460px;
   line-height: 1.5;
 }
@@ -445,20 +322,12 @@
   margin-bottom: 16px;
 }
 
-@media (max-width: 860px) {
-  .zuno-dash-row {
-    grid-template-columns: 1fr;
-  }
-}
-
 .zuno-dash-card {
   position: relative;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 24px;
-  opacity: 0;
-  animation: zuno-fade-up-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
 }
 
 .zuno-dash-card-head {
@@ -487,11 +356,17 @@
 }
 
 /* ============ gráfico de barras ============ */
+.zuno-dash-chart-card {
+  overflow: hidden;
+}
+
 .zuno-chart {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   height: 150px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .zuno-chart-col {
@@ -499,14 +374,19 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   height: 100%;
 }
 
 .zuno-chart-value {
-  font-size: 10.5px;
+  font-size: 9.5px;
   font-weight: 600;
   color: var(--ink-mute);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .zuno-chart-track {
@@ -519,20 +399,13 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%) scaleY(0);
+  transform: translateX(-50%);
   width: 100%;
   max-width: 22px;
   min-height: 6px;
   border-radius: 6px 6px 2px 2px;
   background: linear-gradient(180deg, var(--pink), var(--purple));
-  transform-origin: bottom;
-  animation: zuno-chart-grow 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: 0.4s;
-  box-shadow: 0 0 14px rgba(255, 46, 204, 0.25);
-}
-
-@keyframes zuno-chart-grow {
-  to { transform: translateX(-50%) scaleY(1); }
+  box-shadow: 0 0 14px rgba(255, 46, 204, 0.2);
 }
 
 .zuno-chart-bar-empty {
@@ -541,16 +414,22 @@
   border-radius: 3px;
 }
 
-.zuno-chart-bar:hover {
-  filter: brightness(1.3);
-  box-shadow: 0 0 22px rgba(255, 46, 204, 0.55);
-  cursor: pointer;
-}
-
 .zuno-chart-label {
   font-size: 11px;
   color: var(--ink-mute);
   font-weight: 600;
+}
+
+@media (max-width: 380px) {
+  .zuno-chart {
+    gap: 4px;
+  }
+  .zuno-chart-value {
+    font-size: 8px;
+  }
+  .zuno-chart-bar {
+    max-width: 16px;
+  }
 }
 
 /* ============ pedidos recentes ============ */
@@ -561,63 +440,65 @@
 }
 
 .zuno-dash-recent-item {
-  display: grid;
-  grid-template-columns: 34px 1fr auto;
-  grid-template-rows: auto auto;
-  align-items: center;
-  gap: 4px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   background: var(--bg-alt);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 12px 14px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  padding: 14px;
+  transition: border-color 0.2s ease;
 }
 
 .zuno-dash-recent-item:hover {
   border-color: var(--purple);
-  transform: translateX(2px);
+}
+
+/* linha 1: ícone + nome do produto */
+.zuno-dash-recent-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .zuno-dash-recent-icon {
-  grid-row: 1 / 3;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
   background: var(--card);
   color: var(--pink);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
-}
-
-.zuno-dash-recent-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.zuno-dash-recent-info b {
   font-size: 13px;
+}
+
+.zuno-dash-recent-name {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+  font-size: 13.5px;
+  font-weight: 700;
   color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
 }
 
-.zuno-dash-recent-info span {
-  font-size: 11px;
-  color: var(--ink-mute);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+/* linha 2: valor | status | dia */
+.zuno-dash-recent-mid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .zuno-dash-recent-value {
-  grid-row: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: "Space Grotesk", sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -625,9 +506,44 @@
   white-space: nowrap;
 }
 
-/* ============ status dos pedidos — cor e animação exclusiva por tipo ============ */
+.zuno-dash-recent-value svg {
+  font-size: 11px;
+}
+
+.zuno-dash-recent-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+.zuno-dash-recent-date {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+
+/* linha 3: descrição */
+.zuno-dash-recent-desc {
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* linha 4: id bem pequenininho */
+.zuno-dash-recent-id {
+  font-size: 9.5px;
+  color: var(--ink-mute);
+  opacity: 0.55;
+  font-family: monospace;
+}
+
+/* ============ status dos pedidos ============ */
 .zuno-dash-recent-status {
-  grid-row: 2;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -636,134 +552,60 @@
   padding: 3px 9px;
   border-radius: 999px;
   white-space: nowrap;
-  justify-self: end;
   border: 1px solid transparent;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.zuno-dash-recent-item:hover .zuno-dash-recent-status {
-  transform: scale(1.06);
 }
 
 .zuno-dash-recent-status svg {
   font-size: 9px;
 }
 
-/* aguardando — âmbar, ícone de relógio balançando */
 .zuno-dash-recent-status-aguardando {
   color: #ffb020;
   background: rgba(255, 176, 32, 0.12);
   border-color: rgba(255, 176, 32, 0.28);
 }
 
-.zuno-dash-recent-status-aguardando svg {
-  animation: zuno-status-tick 1.6s ease-in-out infinite;
-}
-
-/* processando — azul, ícone girando */
 .zuno-dash-recent-status-processando {
   color: #38bdf8;
   background: rgba(56, 189, 248, 0.12);
   border-color: rgba(56, 189, 248, 0.28);
 }
 
-.zuno-dash-recent-status-processando svg {
-  animation: zuno-status-spin 1.3s linear infinite;
-}
-
-/* concluído — verde, com leve "pop" */
 .zuno-dash-recent-status-concluido {
   color: #4ade80;
   background: rgba(74, 222, 128, 0.12);
   border-color: rgba(74, 222, 128, 0.28);
-  animation: zuno-status-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* cancelado — vermelho */
 .zuno-dash-recent-status-cancelado {
   color: #ff6b7d;
   background: rgba(255, 107, 125, 0.12);
   border-color: rgba(255, 107, 125, 0.28);
 }
 
-/* reembolsado — azul-acinzentado neutro */
 .zuno-dash-recent-status-reembolsado {
   color: #94a3b8;
   background: rgba(148, 163, 184, 0.12);
   border-color: rgba(148, 163, 184, 0.28);
 }
 
-/* reposto — roxo, ícone girando devagar */
 .zuno-dash-recent-status-reposto {
   color: #c084fc;
   background: rgba(192, 132, 252, 0.14);
   border-color: rgba(192, 132, 252, 0.3);
 }
 
-.zuno-dash-recent-status-reposto svg {
-  animation: zuno-status-spin 2.4s linear infinite;
-}
-
-@keyframes zuno-status-tick {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(18deg); }
-}
-
-@keyframes zuno-status-spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes zuno-status-pop {
-  0% { transform: scale(0.7); opacity: 0; }
-  70% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
 /* ============ formulário de pedido ============ */
 .zuno-dash-order-card {
-  animation-delay: 0.42s;
   margin-bottom: 16px;
 }
 
 /* card de "Novo pedido" em destaque */
 .zuno-dash-order-featured {
-  border-color: rgba(255, 46, 204, 0.3);
+  border-color: rgba(255, 46, 204, 0.22);
   border-radius: 24px;
   padding: 32px 28px 28px;
-  background: linear-gradient(165deg, rgba(36, 22, 56, 0.75), var(--card) 45%);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
-  animation: zuno-fade-up-blur 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both,
-    zuno-order-glow-pulse 4.5s ease-in-out infinite 1.3s;
-}
-
-.zuno-dash-order-featured:hover {
-  transform: translateY(-3px);
-}
-
-.zuno-dash-order-featured::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 24px;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--pink), transparent 45%, var(--purple), transparent 80%, var(--pink));
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.7;
-  pointer-events: none;
-  animation: zuno-order-border-shift 6s linear infinite;
-}
-
-@keyframes zuno-order-glow-pulse {
-  0%, 100% { box-shadow: 0 0 50px rgba(255, 46, 204, 0.2), 0 0 90px rgba(139, 47, 224, 0.12); }
-  50% { box-shadow: 0 0 74px rgba(255, 46, 204, 0.34), 0 0 120px rgba(139, 47, 224, 0.2); }
-}
-
-@keyframes zuno-order-border-shift {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 300% 50%; }
+  background: linear-gradient(165deg, rgba(22, 13, 34, 0.85), var(--card) 45%);
 }
 
 .zuno-dash-order-featured .zuno-dash-card-head {
@@ -772,10 +614,7 @@
 
 .zuno-dash-order-featured .zuno-dash-card-head b {
   font-size: 18px;
-  background: linear-gradient(90deg, var(--ink), #ffd6f7);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ink);
 }
 
 .zuno-dash-order-badge {
@@ -790,28 +629,13 @@
   letter-spacing: 0.02em;
   color: var(--pink);
   background: rgba(255, 46, 204, 0.12);
-  border: 1px solid rgba(255, 46, 204, 0.35);
+  border: 1px solid rgba(255, 46, 204, 0.3);
   padding: 6px 12px;
   border-radius: 999px;
-  box-shadow: 0 0 0 rgba(255, 46, 204, 0);
-  animation: zuno-pulse-soft 2.4s ease-in-out infinite, zuno-badge-glow 2.4s ease-in-out infinite;
 }
 
 .zuno-dash-order-badge svg {
   font-size: 10px;
-  animation: zuno-bolt-flicker 2.4s ease-in-out infinite;
-}
-
-@keyframes zuno-badge-glow {
-  0%, 100% { box-shadow: 0 0 0 rgba(255, 46, 204, 0); }
-  50% { box-shadow: 0 0 16px rgba(255, 46, 204, 0.5); }
-}
-
-@keyframes zuno-bolt-flicker {
-  0%, 100% { opacity: 1; }
-  45% { opacity: 1; }
-  50% { opacity: 0.35; }
-  55% { opacity: 1; }
 }
 
 @media (max-width: 480px) {
@@ -834,24 +658,6 @@
   }
 }
 
-/* entrada escalonada dos campos do formulário — um único momento orquestrado */
-.zuno-dash-form-grid > * {
-  opacity: 0;
-  animation: zuno-field-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.zuno-dash-form-grid > *:nth-child(1) { animation-delay: 0.48s; }
-.zuno-dash-form-grid > *:nth-child(2) { animation-delay: 0.56s; }
-.zuno-dash-form-grid > *:nth-child(3) { animation-delay: 0.64s; }
-.zuno-dash-form-grid > *:nth-child(4) { animation-delay: 0.72s; }
-.zuno-dash-form-grid > *:nth-child(5) { animation-delay: 0.8s; }
-.zuno-dash-form-grid > *:nth-child(6) { animation-delay: 0.88s; }
-
-@keyframes zuno-field-rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .zuno-dash-field-full {
   grid-column: 1 / -1;
 }
@@ -859,6 +665,10 @@
 .zuno-dash-field {
   display: flex;
   flex-direction: column;
+  /* cada campo cria seu próprio contexto de empilhamento pra que o painel
+     flutuante do select fique sempre acima dos campos vizinhos */
+  position: relative;
+  z-index: 1;
 }
 
 .zuno-dash-label {
@@ -889,7 +699,7 @@
   color: var(--ink);
   font-family: "Inter", sans-serif;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .zuno-dash-input::placeholder {
@@ -899,12 +709,15 @@
 .zuno-dash-input:focus {
   border-color: var(--pink);
   box-shadow: 0 0 0 3px rgba(255, 46, 204, 0.15);
-  transform: translateY(-1px);
 }
 
 /* ============ selects customizados ============ */
 .zuno-select {
   position: relative;
+}
+
+.zuno-select-open {
+  z-index: 60;
 }
 
 .zuno-select-trigger {
@@ -922,13 +735,14 @@
   color: var(--ink);
   font-family: "Inter", sans-serif;
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .zuno-select-trigger-left {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .zuno-select-trigger-icon {
@@ -941,11 +755,7 @@
   background: var(--card);
   color: var(--pink);
   font-size: 13px;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.zuno-select-trigger:hover .zuno-select-trigger-icon {
-  transform: scale(1.12) rotate(-6deg);
+  flex-shrink: 0;
 }
 
 .zuno-select-placeholder {
@@ -960,22 +770,17 @@
 .zuno-select-trigger-open {
   border-color: var(--pink);
   box-shadow: 0 0 0 3px rgba(255, 46, 204, 0.15);
-  transform: translateY(-1px);
 }
 
 .zuno-select-trigger-disabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: not-allowed;
-}
-
-.zuno-select-trigger-disabled:hover {
-  transform: none;
 }
 
 .zuno-select-chevron {
   font-size: 12px;
   color: var(--ink-mute);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.2s ease;
   flex-shrink: 0;
 }
 
@@ -1013,17 +818,17 @@
   font-weight: 600;
   color: var(--ink);
   cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  min-width: 0;
 }
 
 .zuno-select-grid-item:hover {
   border-color: var(--pink);
-  transform: translateY(-2px);
 }
 
 .zuno-select-grid-item-active {
   border-color: var(--pink);
-  background: linear-gradient(135deg, rgba(255, 46, 204, 0.14), rgba(139, 47, 224, 0.14));
+  background: linear-gradient(135deg, rgba(255, 46, 204, 0.12), rgba(139, 47, 224, 0.12));
 }
 
 .zuno-select-grid-icon {
@@ -1037,11 +842,6 @@
   color: var(--pink);
   font-size: 14px;
   flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.zuno-select-grid-item:hover .zuno-select-grid-icon {
-  transform: scale(1.15) rotate(-6deg);
 }
 
 .zuno-select-grid-check {
@@ -1050,7 +850,6 @@
   right: 8px;
   font-size: 10px;
   color: var(--pink);
-  animation: zuno-status-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* lista de serviços */
@@ -1071,17 +870,16 @@
   padding: 12px 14px;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .zuno-select-list-item:hover {
   border-color: var(--purple);
-  transform: translateX(2px);
 }
 
 .zuno-select-list-item-active {
   border-color: var(--pink);
-  background: linear-gradient(135deg, rgba(255, 46, 204, 0.14), rgba(139, 47, 224, 0.1));
+  background: linear-gradient(135deg, rgba(255, 46, 204, 0.12), rgba(139, 47, 224, 0.08));
 }
 
 .zuno-select-list-main {
@@ -1148,44 +946,6 @@
 .zuno-dash-info-icon {
   font-size: 15px;
   display: inline-block;
-  animation: zuno-info-glow 2.6s ease-in-out infinite;
-}
-
-@keyframes zuno-info-glow {
-  0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 46, 204, 0)); transform: scale(1) rotate(0deg); }
-  50% { filter: drop-shadow(0 0 6px rgba(255, 46, 204, 0.6)); transform: scale(1.12) rotate(-6deg); }
-}
-
-.zuno-dash-gauge {
-  margin-bottom: 14px;
-}
-
-.zuno-dash-gauge-track {
-  position: relative;
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--purple-dim), var(--purple), var(--pink));
-  margin-bottom: 8px;
-}
-
-.zuno-dash-gauge-marker {
-  position: absolute;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--ink);
-  border: 2px solid var(--pink);
-  box-shadow: 0 0 10px rgba(255, 46, 204, 0.6);
-  transform: translate(-50%, -50%);
-  transition: left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.zuno-dash-gauge-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: var(--ink-mute);
 }
 
 .zuno-dash-info-tags {
@@ -1193,7 +953,6 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
-  animation: zuno-fade-up-blur 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .zuno-dash-info-tag {
@@ -1204,12 +963,6 @@
   border: 1px solid var(--line);
   padding: 6px 10px;
   border-radius: 999px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.zuno-dash-info-tag:hover {
-  border-color: var(--pink);
-  transform: translateY(-1px);
 }
 
 .zuno-dash-info-hint {
@@ -1247,39 +1000,6 @@
   background: var(--pink);
 }
 
-/* ============ chips de quantidade ============ */
-.zuno-dash-chip-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.zuno-dash-chip {
-  border: 1px solid var(--line);
-  background: var(--bg-alt);
-  color: var(--ink-dim);
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 7px 13px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.zuno-dash-chip:hover {
-  border-color: var(--purple);
-  transform: translateY(-2px);
-}
-
-.zuno-dash-chip-active {
-  background: linear-gradient(135deg, var(--pink), #ff6de8);
-  border-color: transparent;
-  color: var(--bg);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 46, 204, 0.35);
-}
-
 /* ============ resumo / valor ============ */
 .zuno-dash-summary {
   position: relative;
@@ -1287,35 +1007,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, rgba(139, 47, 224, 0.16), rgba(255, 46, 204, 0.12));
-  border: 1px solid rgba(255, 46, 204, 0.25);
+  background: linear-gradient(135deg, rgba(139, 47, 224, 0.14), rgba(255, 46, 204, 0.1));
+  border: 1px solid rgba(255, 46, 204, 0.22);
   border-radius: 16px;
   padding: 18px 22px;
-}
-
-.zuno-dash-summary::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(120deg, transparent, rgba(255, 46, 204, 0.45), transparent);
-  background-size: 250% 100%;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: zuno-order-border-shift 5s linear infinite;
-  pointer-events: none;
-}
-
-.zuno-dash-summary-scan {
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 46, 204, 0.16), transparent);
-  animation: zuno-scan 3.4s ease-in-out infinite;
 }
 
 .zuno-dash-summary-label {
@@ -1331,69 +1026,22 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--pink);
-  text-shadow: 0 0 20px rgba(255, 46, 204, 0.4);
-  transition: transform 0.2s ease;
-}
-
-.zuno-dash-summary-bump {
-  animation: zuno-dash-bump 0.32s ease;
-}
-
-@keyframes zuno-dash-bump {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.12); }
-  100% { transform: scale(1); }
 }
 
 /* ============ submit ============ */
 .zuno-dash-submit {
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, opacity 0.3s ease;
+  transition: opacity 0.2s ease;
   width: 100%;
   justify-content: center;
   padding: 14px 0;
   font-size: 15px;
 }
 
-.zuno-dash-submit::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.6s ease;
-  pointer-events: none;
-}
-
-.zuno-dash-submit-ready:hover::after {
-  left: 130%;
-}
-
-.zuno-dash-submit-ready:hover {
-  transform: translateY(-2px) scale(1.01);
-}
-
-.zuno-dash-submit:active {
-  transform: scale(0.97);
-}
-
 .zuno-dash-submit:disabled {
   opacity: 0.45;
   cursor: not-allowed;
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.zuno-dash-submit:disabled::after {
-  display: none;
-}
-
-.zuno-dash-submit-ready {
-  animation: zuno-submit-ready-pulse 1.8s ease-in-out infinite;
 }
 
 .zuno-dash-submit-processing {
@@ -1402,11 +1050,11 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  scale: 0.96;
   background: rgb(54, 54, 54);
   color: white;
 }
 
+/* spinner do envio: única animação mantida, curta e disparada por uma ação do usuário */
 .zuno-dash-submit-processing::before {
   content: "";
   width: 14px;
@@ -1421,31 +1069,20 @@
   to { transform: rotate(360deg); }
 }
 
-@keyframes zuno-submit-ready-pulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(191, 31, 151, 0.35); }
-  50% { box-shadow: 0 6px 36px rgba(255, 46, 204, 0.65); }
-}
-
 /* ============ barra inferior ============ */
 .zuno-bottom-nav {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 60;
+  z-index: 50;
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(18, 11, 30, 0.85);
+  background: rgba(8, 5, 14, 0.9);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--line);
-  animation: zuno-bottom-nav-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
-}
-
-@keyframes zuno-bottom-nav-in {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .zuno-bottom-nav-item {
@@ -1461,7 +1098,7 @@
   font-weight: 600;
   padding: 4px 22px;
   cursor: pointer;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 .zuno-bottom-nav-item:hover {
@@ -1478,11 +1115,6 @@
   border-radius: 12px;
   font-size: 16px;
   color: inherit;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.zuno-bottom-nav-item:hover .zuno-bottom-nav-icon-wrap {
-  transform: translateY(-3px);
 }
 
 .zuno-bottom-nav-item-active {
@@ -1492,8 +1124,6 @@
 .zuno-bottom-nav-item-active .zuno-bottom-nav-icon-wrap {
   background: linear-gradient(135deg, var(--pink), #ff6de8);
   color: var(--bg);
-  box-shadow: 0 6px 18px rgba(255, 46, 204, 0.4);
-  transform: translateY(-4px) scale(1.05);
 }
 
 .zuno-bottom-nav-dot {
@@ -1505,53 +1135,54 @@
   border-radius: 50%;
   background: var(--pink);
   box-shadow: 0 0 8px var(--pink);
-  animation: zuno-pulse 1.8s ease-in-out infinite;
 }
 
-@media (max-width: 480px) {
+/* ============ telas pequenas (320px e afins) ============ */
+@media (max-width: 360px) {
+  .zuno-dash-main {
+    padding: 32px 14px calc(100px + env(safe-area-inset-bottom));
+  }
+
+  .zuno-dash-order-featured {
+    padding: 22px 16px 20px;
+  }
+
+  .zuno-dash-form-grid {
+    gap: 14px;
+  }
+
+  /* garante que o painel do select fique acima de tudo, mesmo com pouco espaço */
+  .zuno-floating-panel,
+  .zuno-select-panel,
+  .zuno-dash-menu-panel {
+    z-index: 999;
+    left: 0;
+    right: 0;
+  }
+
   .zuno-select-panel-grid {
     grid-template-columns: 1fr;
   }
-  .zuno-bottom-nav-item {
-    padding: 4px 14px;
-  }
-  .zuno-dash-promo {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .zuno-dash-promo-btn {
-    width: 100%;
-    justify-content: center;
-  }
-}
 
-.zuno-dash-stats-grid {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  .zuno-dash-recent-name {
+    font-size: 12.5px;
+  }
+
+  .zuno-dash-recent-date {
+    margin-left: 0;
+  }
+
+  .zuno-dash-recent-mid {
+    row-gap: 6px;
+  }
+
+  .zuno-bottom-nav-item {
+    padding: 4px 12px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zuno-bottom-nav-dot,
-  .zuno-dash-summary-scan,
-  .zuno-dash-summary::after,
-  .zuno-dash-welcome-glow,
-  .zuno-dash-welcome-wave,
-  .zuno-dash-welcome-particles span,
-  .zuno-dash-welcome-title,
-  .zuno-dash-order-featured::before,
-  .zuno-dash-order-badge,
-  .zuno-dash-order-badge svg,
-  .zuno-dash-info-icon,
-  .zuno-dash-recent-status-aguardando svg,
-  .zuno-dash-recent-status-processando svg,
-  .zuno-dash-recent-status-reposto svg,
-  .zuno-dash-recent-status-concluido,
-  .zuno-select-grid-check {
+  .zuno-dash-submit-processing::before {
     animation: none !important;
-  }
-
-  .zuno-dash-form-grid > * {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
   }
 }

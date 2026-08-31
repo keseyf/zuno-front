@@ -29,7 +29,6 @@ import { getMe, logout } from "../../controllers/users.controllers";
 import { createOrder, getMyOrders } from "../../controllers/orders.controllers";
 import { getAllProducts } from "../../controllers/products.controllers";
 import { getAllServices } from "../../controllers/services.controllers";
-import { Reveal, useReveal, mergeRefs } from "../../components/Reveal";
 import ResponseCard from "../../components/ResponseCard";
 
 /* ============ tipos — catálogo real ============
@@ -301,7 +300,7 @@ function NetworkSelect({
   const ref = useOutsideClose<HTMLDivElement>(() => setOpen(false));
 
   return (
-    <div className="zuno-select" ref={ref}>
+    <div className={`zuno-select ${open ? "zuno-select-open" : ""}`} ref={ref}>
       <button
         type="button"
         className={`zuno-select-trigger ${open ? "zuno-select-trigger-open" : ""}`}
@@ -366,7 +365,7 @@ function ServiceSelect({
   const disabled = !network || loading;
 
   return (
-    <div className="zuno-select" ref={ref}>
+    <div className={`zuno-select ${open ? "zuno-select-open" : ""}`} ref={ref}>
       <button
         type="button"
         className={`zuno-select-trigger ${open ? "zuno-select-trigger-open" : ""} ${disabled ? "zuno-select-trigger-disabled" : ""}`}
@@ -424,7 +423,7 @@ function SpendingChart({ days }: { days: { label: string; value: number }[] }) {
   const total = days.reduce((a, d) => a + d.value, 0);
 
   return (
-    <Reveal as="div" variant="left" className="zuno-dash-card zuno-dash-chart-card">
+    <div className="zuno-dash-card zuno-dash-chart-card">
       <div className="zuno-dash-card-head">
         <div>
           <b>Gastos da semana</b>
@@ -442,7 +441,6 @@ function SpendingChart({ days }: { days: { label: string; value: number }[] }) {
                 className={`zuno-chart-bar ${d.value === 0 ? "zuno-chart-bar-empty" : ""}`}
                 style={{
                   height: `${(d.value / max) * 100}%`,
-                  animationDelay: `${i * 80}ms`,
                 } as CSSProperties}
               />
             </div>
@@ -450,7 +448,7 @@ function SpendingChart({ days }: { days: { label: string; value: number }[] }) {
           </div>
         ))}
       </div>
-    </Reveal>
+    </div>
   );
 }
 
@@ -477,7 +475,6 @@ export default function Dashboard() {
   const [submitOrderLoading, setSubmitOrderLoading] = useState(false);
 
   const orderFormRef = useRef<HTMLDivElement>(null);
-  const [orderRevealRef, orderInView] = useReveal<HTMLDivElement>();
 
   // carga inicial: usuário, pedidos, redes (produtos) + promo de Instagram
   useEffect(() => {
@@ -564,18 +561,6 @@ export default function Dashboard() {
 
   const price = service ? service.price : 0;
 
-  const [bump, setBump] = useState(false);
-  const firstRender = useRef(true);
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-    setBump(true);
-    const t = setTimeout(() => setBump(false), 320);
-    return () => clearTimeout(t);
-  }, [price]);
-
   const handleNetworkChange = (n: NetworkOption) => {
     setNetwork(n);
     setService(null);
@@ -625,18 +610,18 @@ export default function Dashboard() {
       </header>
 
       <main className="zuno-dash-main">
-        <Reveal as="div" variant="up" className="zuno-dash-topbar">
+        <div className="zuno-dash-topbar">
           <span className="zuno-eyebrow zuno-dash-eyebrow">
             <span className="zuno-dot" /> Painel
           </span>
-        </Reveal>
+        </div>
 
-        <Reveal as="h1" variant="up" delay={60} className="zuno-dash-title">
+        <h1 className="zuno-dash-title">
           Seu painel, sempre no <span className="zuno-h1-accent">controle.</span>
-        </Reveal>
-        <Reveal as="p" variant="up" delay={120} className="zuno-dash-subtitle">
+        </h1>
+        <p className="zuno-dash-subtitle">
           Acompanhe seu saldo, seus gastos e faça novos pedidos em um só lugar.
-        </Reveal>
+        </p>
 
         {error && (
           <p style={{ color: "var(--ink-mute)", fontSize: 13, marginBottom: 12 }}>{error}</p>
@@ -644,33 +629,28 @@ export default function Dashboard() {
 
         {/* STATS */}
         <div className="zuno-dash-stats-grid">
-          <Reveal as="div" variant="scale" delay={0} className="zuno-dash-stat-card zuno-dash-stat-highlight">
+          <div className="zuno-dash-stat-card zuno-dash-stat-highlight">
             <FaWallet className="zuno-dash-stat-icon" />
             <span className="zuno-dash-stat-value">{formatBRL(user?.credits ?? 0)}</span>
             <span className="zuno-dash-stat-label">Saldo atual</span>
-          </Reveal>
+          </div>
 
-          <Reveal as="div" variant="scale" delay={90} className="zuno-dash-stat-card">
+          <div className="zuno-dash-stat-card">
             <FaChartLine className="zuno-dash-stat-icon" />
             <span className="zuno-dash-stat-value">{formatBRL(totalGasto)}</span>
             <span className="zuno-dash-stat-label">Total gasto</span>
-          </Reveal>
+          </div>
 
-          <Reveal as="div" variant="scale" delay={180} className="zuno-dash-stat-card">
+          <div className="zuno-dash-stat-card">
             <FaShoppingBag className="zuno-dash-stat-icon" />
             <span className="zuno-dash-stat-value">{orders.length}</span>
             <span className="zuno-dash-stat-label">Pedidos realizados</span>
-          </Reveal>
+          </div>
         </div>
 
-        {/* PROMOÇÃO DO DIA — só aparece se houver serviço de Instagram no catálogo real */}
         {/* BOAS-VINDAS */}
-        <Reveal as="div" variant="scale" className="zuno-dash-welcome">
+        <div className="zuno-dash-welcome">
           <div className="zuno-dash-welcome-glow" />
-          <div className="zuno-dash-welcome-shine" />
-          <div className="zuno-dash-welcome-particles">
-            <span /><span /><span /><span /><span /><span /><span /><span />
-          </div>
 
           <div className="zuno-dash-welcome-content">
             <span className="zuno-dash-welcome-wave" role="img" aria-label="Aceno">👋</span>
@@ -684,11 +664,11 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-        </Reveal>
-        {/* NOVO PEDIDO — em destaque, com ref de scroll + reveal mesclados */}
+        </div>
+        {/* NOVO PEDIDO — em destaque */}
         <div
-          ref={mergeRefs(orderRevealRef, orderFormRef)}
-          className={`zuno-reveal-scale zuno-stagger ${orderInView ? "zuno-in" : ""} zuno-dash-card zuno-dash-order-card zuno-dash-order-featured`}
+          ref={orderFormRef}
+          className="zuno-dash-card zuno-dash-order-card zuno-dash-order-featured"
         >
           <span className="zuno-dash-order-badge">
             <FaBolt /> Peça em segundos
@@ -765,9 +745,8 @@ export default function Dashboard() {
 
               {/* valor */}
               <div className="zuno-dash-summary zuno-dash-field-full">
-                <div className="zuno-dash-summary-scan" />
                 <span className="zuno-dash-summary-label">Valor total</span>
-                <span className={`zuno-dash-summary-value ${bump ? "zuno-dash-summary-bump" : ""}`}>
+                <span className="zuno-dash-summary-value">
                   {formatBRL(price)}
                 </span>
               </div>
@@ -794,11 +773,10 @@ export default function Dashboard() {
         </div>
 
         {/* GRÁFICO + PEDIDOS RECENTES — dados reais */}
-        {/* GRÁFICO + PEDIDOS RECENTES — dados reais */}
         <div className="zuno-dash-row">
           <SpendingChart days={weeklySpending} />
 
-          <Reveal as="div" variant="right" className="zuno-dash-card zuno-dash-recent-card">
+          <div className="zuno-dash-card zuno-dash-recent-card">
             <div className="zuno-dash-card-head">
               <div>
                 <b>Pedidos recentes</b>
@@ -812,23 +790,37 @@ export default function Dashboard() {
               {orders.length === 0 ? (
                 <p className="zuno-dash-info-hint">Você ainda não fez nenhum pedido.</p>
               ) : (
-                orders.slice(0, 5).map((o, i) => (
-                  <Reveal as="div" variant="up" delay={i * 70} className="zuno-dash-recent-item" key={o.id}>
-                    <span className="zuno-dash-recent-icon">
-                      <FaShoppingBag />
-                    </span>
-                    <div className="zuno-dash-recent-info">
-  <b title={o.serviceName}>{o.serviceName}</b>
-  {o.serviceDesc && <span title={o.serviceDesc}>{o.serviceDesc}</span>}
-  <span>{formatDate(o.createdAt)}</span>
-</div>
-<span className="zuno-dash-recent-value">R$ {o.value}</span>
-<OrderStatusBadge status={o.status} />
-                  </Reveal>
+                orders.slice(0, 5).map((o) => (
+                  <div className="zuno-dash-recent-item" key={o.id}>
+                    <div className="zuno-dash-recent-top">
+                      <span className="zuno-dash-recent-icon">
+                        <FaShoppingBag />
+                      </span>
+                      <span className="zuno-dash-recent-name" title={o.serviceName}>
+                        {o.serviceName}
+                      </span>
+                    </div>
+
+                    <div className="zuno-dash-recent-mid">
+                      <span className="zuno-dash-recent-value">
+                        <FaWallet /> R$ {o.value}
+                      </span>
+                      <span className="zuno-dash-recent-sep" />
+                      <OrderStatusBadge status={o.status} />
+                      <span className="zuno-dash-recent-sep" />
+                      <span className="zuno-dash-recent-date">{formatDate(o.createdAt)}</span>
+                    </div>
+
+                    <p className="zuno-dash-recent-desc">
+                      {o.serviceDesc ? o.serviceDesc : "(sem descrição)"}
+                    </p>
+
+                    <span className="zuno-dash-recent-id">#{o.id}</span>
+                  </div>
                 ))
               )}
             </div>
-          </Reveal>
+          </div>
         </div>
       </main>
 
