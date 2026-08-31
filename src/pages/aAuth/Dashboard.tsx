@@ -17,6 +17,11 @@ import {
   FaChartLine,
   FaShoppingBag,
   FaBolt,
+  FaClock,
+  FaRedoAlt,
+  FaSyncAlt,
+  FaTimesCircle,
+  FaUndoAlt,
 } from "react-icons/fa";
 import { BsTelegram } from "react-icons/bs";
 
@@ -51,6 +56,8 @@ interface ApiService {
 
   price: number | string; // requer a migration que adiciona price em Service
 }
+
+
 
 interface ServiceOption {
   id: string;
@@ -89,6 +96,7 @@ interface OrderData {
   serviceDesc?: string | null;
   value: number;
   createdAt: string;
+  status?: "AGUARDANDO" | "PROCESSANDO" | "CONCLUIDO" | "CANCELADO" | "REEMBOLSADO" | "REPOSTO";
 }
 
 const formatBRL = (v: number) =>
@@ -101,6 +109,25 @@ const formatDate = (iso: string) => {
     return iso;
   }
 };
+
+const ORDER_STATUS_META: Record<string, { label: string; className: string; icon?: ReactNode }> = {
+  AGUARDANDO:  { label: "Aguardando",  className: "zuno-dash-recent-status-aguardando",  icon: <FaClock /> },
+  PROCESSANDO: { label: "Processando", className: "zuno-dash-recent-status-processando", icon: <FaSyncAlt /> },
+  CONCLUIDO:   { label: "Concluído",   className: "zuno-dash-recent-status-concluido",   icon: <FaCheck /> },
+  CANCELADO:   { label: "Cancelado",   className: "zuno-dash-recent-status-cancelado",   icon: <FaTimesCircle /> },
+  REEMBOLSADO: { label: "Reembolsado", className: "zuno-dash-recent-status-reembolsado", icon: <FaUndoAlt /> },
+  REPOSTO:     { label: "Reposto",     className: "zuno-dash-recent-status-reposto",     icon: <FaRedoAlt /> },
+};
+
+function OrderStatusBadge({ status }: { status?: string }) {
+  const meta = ORDER_STATUS_META[status ?? "AGUARDANDO"] ?? ORDER_STATUS_META.AGUARDANDO;
+  return (
+    <span className={`zuno-dash-recent-status ${meta.className}`}>
+      {meta.icon}
+      {meta.label}
+    </span>
+  );
+}
 
 function getGreeting() {
   const hour = new Date().getHours();
@@ -791,11 +818,12 @@ export default function Dashboard() {
                       <FaShoppingBag />
                     </span>
                     <div className="zuno-dash-recent-info">
-                      <b title={o.serviceName}>{o.serviceName}</b>
-                      {o.serviceDesc && <span title={o.serviceDesc}>{o.serviceDesc}</span>}
-                      <span>{formatDate(o.createdAt)}</span>
-                    </div>
-                    <span className="zuno-dash-recent-value">{formatBRL(o.value)}</span>
+  <b title={o.serviceName}>{o.serviceName}</b>
+  {o.serviceDesc && <span title={o.serviceDesc}>{o.serviceDesc}</span>}
+  <span>{formatDate(o.createdAt)}</span>
+</div>
+<span className="zuno-dash-recent-value">R$ {o.value}</span>
+<OrderStatusBadge status={o.status} />
                   </Reveal>
                 ))
               )}
