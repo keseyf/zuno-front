@@ -5,7 +5,7 @@
   --purple: #8b2fe0;
   --purple-dim: #5e1fa0;
   --pink: #ff2ecc;
-  --ink: #f7f1ff;
+  --ink: #faf9fa;
   --ink-dim: #c9aee8;
   --ink-mute: #8b7aa3;
   --line: #33224a;
@@ -48,9 +48,17 @@ a {
 }
 
 @keyframes zuno-glow-drift {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-2%, 2%) scale(1.05); }
-  100% { transform: translate(2%, -2%) scale(1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-2%, 2%) scale(1.05);
+  }
+
+  100% {
+    transform: translate(2%, -2%) scale(1);
+  }
 }
 
 .zuno-bg-grid {
@@ -68,8 +76,13 @@ a {
 }
 
 @keyframes zuno-grid-pan {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 56px 112px, 56px 112px; }
+  0% {
+    background-position: 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 56px 112px, 56px 112px;
+  }
 }
 
 .zuno-orb {
@@ -109,14 +122,31 @@ a {
 }
 
 @keyframes zuno-float-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, 40px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, 40px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
 }
 
 @keyframes zuno-float-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, -30px) scale(1.15); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(40px, -30px) scale(1.15);
+  }
 }
 
 .zuno-noise {
@@ -189,8 +219,15 @@ a {
 }
 
 @keyframes zuno-fade-down {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .zuno-nav {
@@ -227,14 +264,21 @@ a {
   animation: zuno-mark-shift 4s ease-in-out infinite;
 }
 
-.zuno-logo-mark img{
+.zuno-logo-mark img {
   width: 50px;
   height: 50px;
 }
 
 @keyframes zuno-mark-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .zuno-nav-links {
@@ -352,6 +396,7 @@ a {
     grid-template-columns: 1fr;
     padding-top: 56px;
   }
+
   .zuno-h1 {
     font-size: 38px !important;
   }
@@ -395,8 +440,17 @@ a {
 }
 
 @keyframes zuno-fade-up-blur {
-  from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 .zuno-h1-accent {
@@ -409,7 +463,9 @@ a {
 }
 
 @keyframes zuno-text-shine {
-  to { background-position: 200% center; }
+  to {
+    background-position: 200% center;
+  }
 }
 
 .zuno-hero-p {
@@ -461,13 +517,27 @@ a {
 }
 
 @keyframes zuno-card-in {
-  from { opacity: 0; transform: translateY(30px) rotate(-2deg); }
-  to { opacity: 1; transform: translateY(0) rotate(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotate(-2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
 }
 
 @keyframes zuno-card-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .zuno-redeem-card::before {
@@ -543,8 +613,13 @@ a {
 }
 
 @keyframes zuno-scan {
-  0% { left: -60%; }
-  100% { left: 130%; }
+  0% {
+    left: -60%;
+  }
+
+  100% {
+    left: 130%;
+  }
 }
 
 .zuno-redeem-code b {
@@ -562,8 +637,17 @@ a {
 }
 
 @keyframes zuno-pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 46, 204, 0.5); }
-  50% { opacity: 0.4; box-shadow: 0 0 0 6px rgba(255, 46, 204, 0); }
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 46, 204, 0.5);
+  }
+
+  50% {
+    opacity: 0.4;
+    box-shadow: 0 0 0 6px rgba(255, 46, 204, 0);
+  }
 }
 
 .zuno-redeem-meta {
@@ -621,6 +705,7 @@ a {
 }
 
 @media (max-width: 860px) {
+
   .zuno-cat-grid,
   .zuno-rail {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -678,8 +763,15 @@ a {
 }
 
 @keyframes zuno-pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
 }
 
 /* wrap do ícone com anel girando */
@@ -721,8 +813,13 @@ a {
 }
 
 @keyframes zuno-404-spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .zuno-cat-card:hover .zuno-cat-icon {
@@ -770,9 +867,12 @@ a {
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
-  transition: border-color 0.25s ease, box-shadow 0.3s ease;
+  transition: border-color 0.5s ease, box-shadow 0.3s ease;
   cursor: pointer;
   will-change: transform;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .zuno-p-card:hover {
@@ -830,12 +930,24 @@ a {
 
 .zuno-p-body {
   padding: 16px;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
+
 .zuno-p-name {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 10px;
+  transition: color 0.2s ease;
+}
+
+.zuno-p-card:hover .zuno-p-name {
+  color: var(--pink);
 }
 
 /* barra de "vendido hoje" */
@@ -867,7 +979,9 @@ a {
 }
 
 @keyframes zuno-p-sold-fill {
-  to { transform: scaleX(1); }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .zuno-p-sold-label {
@@ -875,10 +989,13 @@ a {
   color: var(--ink-mute);
 }
 
+
 .zuno-p-row {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
+  min-height: 28px;
 }
 
 .zuno-p-price-wrap {
@@ -890,29 +1007,54 @@ a {
 .zuno-p-old-price {
   font-size: 12px;
   color: var(--ink-mute);
+  margin: 0;
   text-decoration: line-through;
 }
 
 .zuno-p-price {
   font-family: "Space Grotesk", sans-serif;
-  font-weight: 700;
-  color: var(--pink);
-  font-size: 15px;
+  font-weight: 800;
+  font-size: 19px;
+  background: linear-gradient(90deg, var(--pink), #ff8bde);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(255, 46, 204, 0.35);
 }
 
 .zuno-p-mini-btn {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 14px;
+  align-items: center;
+  width: auto;
   font-size: 12px;
-  font-weight: 600;
-  color: var(--bg);
-  background: var(--ink);
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: background 0.25s ease, transform 0.25s ease;
+  font-weight: 700;
+  color: var(--pink);
+  background: rgba(255, 46, 204, 0.1);
+  border: 1px solid rgba(255, 46, 204, 0.35);
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.zuno-p-mini-btn::after {
+  content: "→";
+  margin-left: 5px;
+  transition: transform 0.2s ease;
 }
 
 .zuno-p-card:hover .zuno-p-mini-btn {
-  background: var(--pink);
-  transform: scale(1.06);
+  background: linear-gradient(135deg, var(--pink), #ff6de8);
+  color: var(--bg);
+  border-color: transparent;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(255, 46, 204, 0.4);
+}
+
+.zuno-p-card:hover .zuno-p-mini-btn::after {
+  transform: translateX(3px);
 }
 
 /* ============ marquee ============ */
@@ -949,8 +1091,13 @@ a {
 }
 
 @keyframes zuno-marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ============ how it works (turbinado) ============ */
@@ -980,6 +1127,7 @@ a {
   .zuno-how-grid {
     grid-template-columns: 1fr;
   }
+
   .zuno-foot-grid {
     grid-template-columns: 1fr 1fr !important;
   }
@@ -1103,8 +1251,17 @@ a {
 }
 
 @keyframes zuno-video-pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 8px 30px rgba(255, 46, 204, 0.45); }
-  50% { transform: scale(1.08); box-shadow: 0 8px 40px rgba(255, 46, 204, 0.65); }
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 30px rgba(255, 46, 204, 0.45);
+  }
+
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 8px 40px rgba(255, 46, 204, 0.65);
+  }
 }
 
 .zuno-how-video-label {
@@ -1226,8 +1383,30 @@ a {
   color: var(--ink-mute);
 }
 
+/* LOGO DO RODAPÉ */
+.zuno-foot-logo-img {
+  width: 200px !important;
+  height: auto !important;
+  max-width: none !important;
+  display: block;
+  object-fit: contain;
+}
+
+.zuno-logo-mark {
+  width: fit-content !important;
+  height: fit-content !important;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  background: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
 /* ============ reduced motion ============ */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -1235,6 +1414,7 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
   .zuno-reveal,
   .zuno-reveal-scale,
   .zuno-reveal-left,
@@ -1242,6 +1422,7 @@ a {
     opacity: 1;
     transform: none;
   }
+
   .zuno-p-sold-bar span {
     transform: scaleX(1);
   }
@@ -1265,9 +1446,11 @@ a {
   .zuno-nav {
     gap: 10px;
   }
+
   .zuno-nav-cta {
     gap: 8px;
   }
+
   .zuno-nav-cta .zuno-btn {
     padding: 9px 14px;
     font-size: 13px;

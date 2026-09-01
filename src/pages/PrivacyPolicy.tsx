@@ -12,7 +12,6 @@ export default function PrivacyPolicy() {
 
         <header className="zuno-legal-head">
           <div className="zuno-legal-logo">
-            <span className="zuno-logo-mark">Z</span>
             <span>Zuuuno Store</span>
           </div>
           <h1 className="zuno-legal-title">Política de Privacidade</h1>

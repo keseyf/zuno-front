@@ -1,3 +1,16 @@
+/* ============ tema mais escuro (mesma linha do dashboard) ============ */
+.zuno-profile-page {
+  --card: rgba(13, 7, 22, 0.93);
+  --bg-alt: rgba(9, 5, 16, 0.9);
+  --line: rgba(139, 47, 224, 0.16);
+
+  background:
+    radial-gradient(1000px 650px at 12% -10%, rgba(139, 47, 224, 0.1), transparent 60%),
+    radial-gradient(850px 600px at 100% 10%, rgba(255, 46, 204, 0.08), transparent 55%),
+    #05030a;
+  min-height: 100vh;
+}
+
 /* ============ main ============ */
 .zuno-profile-main {
   position: relative;
@@ -10,7 +23,7 @@
 
 .zuno-profile-eyebrow {
   margin: 0 auto 20px;
-  animation: zuno-fade-down 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  animation: zuno-fade-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.03s both;
 }
 
 .zuno-profile-title {
@@ -20,14 +33,14 @@
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: 8px;
-  animation: zuno-fade-up-blur 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  animation: zuno-fade-up-blur 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
 }
 
 .zuno-profile-subtitle {
   font-size: 14.5px;
   color: var(--ink-mute);
   margin-bottom: 32px;
-  animation: zuno-fade-up-blur 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: zuno-fade-up-blur 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 
 /* ============ hero: avatar + email + créditos ============ */
@@ -37,7 +50,7 @@
   align-items: center;
   margin-bottom: 28px;
   opacity: 0;
-  animation: zuno-fade-up-blur 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  animation: zuno-fade-up-blur 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
 }
 
 .zuno-profile-avatar {
@@ -52,9 +65,10 @@
   font-weight: 700;
   color: var(--bg);
   background: linear-gradient(135deg, var(--pink), var(--purple));
-  box-shadow: 0 0 0 4px var(--bg-alt), 0 0 0 5px var(--line), 0 10px 30px rgba(255, 46, 204, 0.35);
+  box-shadow: 0 0 0 4px var(--bg-alt), 0 0 0 5px var(--line), 0 10px 30px rgba(255, 46, 204, 0.28);
   margin-bottom: 14px;
-  animation: zuno-card-float 5s ease-in-out infinite 1.2s;
+  /* flutuação bem mais lenta e discreta do que antes */
+  animation: zuno-card-float 11s ease-in-out infinite 1.2s;
 }
 
 .zuno-profile-email {
@@ -72,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, rgba(139, 47, 224, 0.18), rgba(255, 46, 204, 0.14));
+  background: linear-gradient(135deg, rgba(139, 47, 224, 0.14), rgba(255, 46, 204, 0.1));
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 26px 24px;
@@ -84,8 +98,9 @@
   left: -60%;
   width: 40%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 46, 204, 0.16), transparent);
-  animation: zuno-scan 3.6s ease-in-out infinite;
+  /* brilho bem mais fraco e bem mais lento */
+  background: linear-gradient(120deg, transparent, rgba(255, 46, 204, 0.08), transparent);
+  animation: zuno-scan 8s ease-in-out infinite;
 }
 
 .zuno-profile-credits-label {
@@ -101,7 +116,7 @@
   font-size: 34px;
   font-weight: 700;
   color: var(--pink);
-  text-shadow: 0 0 26px rgba(255, 46, 204, 0.45);
+  text-shadow: 0 0 20px rgba(255, 46, 204, 0.35);
   margin-bottom: 10px;
 }
 
@@ -122,7 +137,7 @@
   padding: 5px;
   margin: 28px 0 20px;
   opacity: 0;
-  animation: zuno-fade-up-blur 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  animation: zuno-fade-up-blur 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
 
 .zuno-profile-tab {
@@ -151,7 +166,7 @@
   height: calc(100% - 10px);
   border-radius: 10px;
   background: linear-gradient(135deg, var(--pink), #ff6de8);
-  box-shadow: 0 4px 16px rgba(255, 46, 204, 0.35);
+  box-shadow: 0 4px 16px rgba(255, 46, 204, 0.3);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 1;
 }
@@ -170,18 +185,17 @@
 }
 
 .zuno-profile-item {
-  display: grid;
-  grid-template-columns: 38px 1fr auto;
-  grid-template-rows: auto auto;
-  align-items: center;
-  gap: 3px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 13px 16px;
+  padding: 14px 16px;
   opacity: 0;
-  transform: translateY(16px);
-  animation: zuno-fade-up-blur 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform: translateY(6px);
+  /* entrada bem mais curta e sutil que antes */
+  animation: zuno-fade-up-blur 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--d, 0ms);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
@@ -191,70 +205,92 @@
   transform: translateX(3px);
 }
 
+/* linha 1: ícone + nome do produto */
+.zuno-profile-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .zuno-profile-item-icon {
-  grid-row: 1 / 3;
-  width: 38px;
-  height: 38px;
-  border-radius: 11px;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
   background: var(--bg-alt);
   color: var(--pink);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 14px;
 }
 
-.zuno-profile-item-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.zuno-profile-item-name {
+  flex: 1;
   min-width: 0;
-}
-
-.zuno-profile-item-info b {
+  text-align: right;
   font-size: 13.5px;
+  font-weight: 700;
   color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.zuno-profile-item-info span {
-  font-size: 11.5px;
-  color: var(--ink-mute);
+/* linha 2: valor | dia */
+.zuno-profile-item-mid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .zuno-profile-item-value {
-  grid-row: 1;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--pink);
-  white-space: nowrap;
-}
-
-.zuno-profile-item-status {
-  grid-row: 2;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 10.5px;
+  gap: 6px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
   font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 999px;
-  white-space: nowrap;
-  justify-self: end;
-}
-
-.zuno-profile-item-status svg {
-  font-size: 9px;
-}
-
-.zuno-profile-item-status-ok {
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.12);
-}
-
-.zuno-profile-item-status-pending {
   color: var(--pink);
-  background: rgba(255, 46, 204, 0.12);
+  white-space: nowrap;
+}
+
+.zuno-profile-item-value svg {
+  font-size: 11px;
+}
+
+.zuno-profile-item-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+.zuno-profile-item-date {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  white-space: nowrap;
+}
+
+/* linha 3: descrição (link do pedido, se houver) */
+.zuno-profile-item-desc {
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* linha 4: id bem pequenininho */
+.zuno-profile-item-id {
+  font-size: 9.5px;
+  color: var(--ink-mute);
+  opacity: 0.55;
+  font-family: monospace;
 }
 
 /* ============ sair — discreto, sem vermelho ============ */
@@ -263,7 +299,7 @@
   justify-content: center;
   gap: 8px;
   opacity: 0;
-  animation: zuno-fade-up-blur 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  animation: zuno-fade-up-blur 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
 @media (max-width: 480px) {
@@ -272,5 +308,27 @@
   }
   .zuno-profile-credits-value {
     font-size: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  .zuno-profile-item-name {
+    font-size: 12.5px;
+  }
+  .zuno-profile-item-date {
+    margin-left: 0;
+  }
+  .zuno-profile-item-mid {
+    row-gap: 6px;
+  }
+  .zuno-profile-item-value {
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zuno-profile-avatar,
+  .zuno-profile-credits-scan {
+    animation: none !important;
   }
 }

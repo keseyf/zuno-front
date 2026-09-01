@@ -13,7 +13,6 @@ export default function TermsOfUse() {
 
         <header className="zuno-legal-head">
           <div className="zuno-legal-logo">
-            <span className="zuno-logo-mark">Z</span>
             <span>Zuuuno Store</span>
           </div>
           <h1 className="zuno-legal-title">Termos de Uso</h1>

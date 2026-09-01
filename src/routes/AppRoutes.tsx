@@ -11,6 +11,7 @@ import Dashboard from "../pages/aAuth/Dashboard.tsx";
 import Profile from "../pages/aAuth/Profile.tsx";
 import Settings from "../pages/aAuth/Settings.tsx";
 import PrivateRoute from "../components/PrivateRoute.tsx";
+import Recharge from "../pages/aAuth/Recharge.tsx";
 
 export default function AppRoutes() {
   return (
@@ -40,11 +41,19 @@ export default function AppRoutes() {
           </PrivateRoute>
         }
       />
-      <Route
+      {/* <Route
         path="/configuracoes"
         element={
           <PrivateRoute>
             <Settings />
+          </PrivateRoute>
+        }
+      /> */}
+      <Route
+        path="/recarga"
+        element={
+          <PrivateRoute>
+            <Recharge />
           </PrivateRoute>
         }
       />

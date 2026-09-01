@@ -1,0 +1,202 @@
+/* =========================================================================
+   Recharge.css
+   Complementa Home.css + Dashboard.css — só o que é específico da tela
+   de recarga (chips de valor rápido, QR code, copia-e-cola, resultados).
+   ========================================================================= */
+
+/* ============ chips de valor rápido ============ */
+.zuno-rec-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.zuno-rec-chip {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-dim);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.zuno-rec-chip:hover {
+  border-color: var(--purple);
+  color: var(--ink);
+}
+
+.zuno-rec-chip-active {
+  border-color: var(--pink);
+  color: var(--ink);
+  background: linear-gradient(135deg, rgba(255, 46, 204, 0.16), rgba(139, 47, 224, 0.12));
+}
+
+.zuno-rec-hint {
+  font-size: 11.5px;
+  color: var(--ink-mute);
+  margin-top: 8px;
+}
+
+.zuno-rec-hint-error {
+  color: #ff6b7d;
+}
+
+/* ============ QR code ============ */
+.zuno-rec-qr-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 4px 0 6px;
+}
+
+.zuno-rec-amount-display {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+.zuno-rec-qr-frame {
+  width: 220px;
+  height: 220px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.zuno-rec-qr-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ============ pill de status "aguardando" com pulso ============ */
+.zuno-rec-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 176, 32, 0.3);
+  color: #ffb020;
+  background: rgba(255, 176, 32, 0.1);
+}
+
+.zuno-rec-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: zuno-rec-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes zuno-rec-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.6); }
+}
+
+/* ============ campo copia-e-cola ============ */
+.zuno-rec-copy-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.zuno-rec-copy-field code {
+  flex: 1;
+  min-width: 0;
+  font-size: 11.5px;
+  color: var(--ink-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: monospace;
+}
+
+.zuno-rec-copy-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.zuno-rec-copy-btn:hover {
+  opacity: 0.9;
+}
+
+.zuno-rec-copy-btn-done {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+/* ============ estado final: aprovado / recusado / cancelado ============ */
+.zuno-rec-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 16px 0 6px;
+}
+
+.zuno-rec-result-icon {
+  font-size: 42px;
+}
+
+.zuno-rec-result-icon-success {
+  color: #4ade80;
+}
+
+.zuno-rec-result-icon-error {
+  color: #ff6b7d;
+}
+
+/* ============ nota de termos de uso ============ */
+.zuno-rec-terms {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-top: 18px;
+}
+
+.zuno-rec-terms a {
+  color: var(--pink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.zuno-rec-terms a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 380px) {
+  .zuno-rec-qr-frame {
+    width: 180px;
+    height: 180px;
+  }
+}

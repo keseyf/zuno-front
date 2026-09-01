@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, type ElementType, type ReactNode, type CSSProperties } from "react";
 import "../styles/Home.css";
+import "../styles/Home.overrides.css";
 import { ImInstagram } from "react-icons/im";
-import { FaTiktok, FaYoutube } from "react-icons/fa";
+import { FaTiktok, FaYoutube, FaFire, FaChartLine, FaStar } from "react-icons/fa";
 import { BsTelegram } from "react-icons/bs";
 
 const categories = [
@@ -11,11 +12,18 @@ const categories = [
   { icon: <BsTelegram/>, title: "Telegram", desc: "Inscritos para seu canal no Telegram", tag: "Novo" },
 ];
 
+/* ícone que acompanha cada selo da categoria */
+const CATEGORY_TAG_ICON: Record<string, ReactNode> = {
+  "Mais popular": <FaChartLine />,
+  "Em alta": <FaFire />,
+  "Novo": <FaStar />,
+};
+
 const products = [
-  { image: "/produtos/instagram.png", name: "1000 Seguidores Instagram", price: "R$ 9.99", oldPrice: "R$ 19,90", sold: 82, badge: "Mais vendido" },
-  { image: "/produtos/tiktok.png", name: "5000 Views TikTok", price: "R$ 9,90", oldPrice: null, sold: 64, badge: null },
-  { image: "/produtos/youtube.png", name: "500 Inscritos YouTube", price: "R$ 29,90", oldPrice: "R$ 39,90", sold: 47, badge: "Oferta" },
-  { image: "/produtos/curtidas.png", name: "1000 Curtidas Instagram", price: "R$ 7,90", oldPrice: null, sold: 91, badge: "Mais vendido" },
+  { image: "/produtos/instagram.png", name: "1000 Seguidores Instagram", price: "R$ 9.99", oldPrice: "R$ 19,90", badge: "Mais vendido" },
+  { image: "/produtos/tiktok.png", name: "5000 Views TikTok", price: "R$ 9,90", oldPrice: null, badge: null },
+  { image: "/produtos/youtube.png", name: "500 Inscritos YouTube", price: "R$ 29,90", oldPrice: "R$ 39,90", badge: "Oferta" },
+  { image: "/produtos/curtidas.png", name: "1000 Curtidas Instagram", price: "R$ 7,90", oldPrice: null, badge: "Mais vendido" },
 ];
 
 const steps = [
@@ -98,7 +106,12 @@ function ProductCard({ p, delay }: { p: typeof products[number]; delay: number }
     });
   };
 
-  const handleMouseLeave = () => setTilt({});
+  const handleMouseLeave = () => {
+  setTilt({
+    transform:
+      "perspective(700px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)"
+  });
+};
 
   return (
     <div
@@ -115,26 +128,20 @@ function ProductCard({ p, delay }: { p: typeof products[number]; delay: number }
       <div className="zuno-p-body">
         <h3 className="zuno-p-name">{p.name}</h3>
 
-        <div className="zuno-p-sold">
-          <div className="zuno-p-sold-bar">
-            <span style={{ width: `${p.sold}%` }} />
-          </div>
-          <span className="zuno-p-sold-label">{p.sold}% já vendido hoje</span>
-        </div>
-
         <div className="zuno-p-row">
           <div className="zuno-p-price-wrap">
             {p.oldPrice && <span className="zuno-p-old-price">{p.oldPrice}</span>}
             <span className="zuno-p-price">{p.price}</span>
           </div>
-          <span className="zuno-p-mini-btn">Comprar</span>
         </div>
+
+        <a href="/dashboard" className="zuno-p-mini-btn">Comprar</a>
       </div>
     </div>
   );
 }
 
-export default function ZunoStore() {
+export default function Home() {
   return (
     <div className="zuno-page">
       {/* animated backdrop layers */}
@@ -231,7 +238,12 @@ export default function ZunoStore() {
         <div className="zuno-cat-grid">
           {categories.map((c, i) => (
             <Reveal key={c.title} variant="scale" delay={i * 90} className="zuno-cat-card">
-              {c.tag && <span className="zuno-cat-tag">{c.tag}</span>}
+              {c.tag && (
+                <span className="zuno-cat-tag">
+                  {CATEGORY_TAG_ICON[c.tag]}
+                  {c.tag}
+                </span>
+              )}
               <div className="zuno-cat-icon-wrap">
                 <div className="zuno-cat-icon">{c.icon}</div>
                 <span className="zuno-cat-icon-ring" />
@@ -317,7 +329,9 @@ export default function ZunoStore() {
           <div className="zuno-foot-grid">
             <div>
               <div style={{fontStyle:"italic"}} className="zuno-logo">
-                <span  className="zuno-logo-mark"><img style={{width: "200px", height: "60px"}} src="/logo.png" alt=""/></span>
+                <span className="zuno-logo-mark">
+                  <img className="zuno-foot-logo-img" src="/logo.png" alt="" />
+                </span>
               </div>
               <p className="zuno-foot-brand-p">
                 Seguidores, curtidas e views para todas as redes sociais,

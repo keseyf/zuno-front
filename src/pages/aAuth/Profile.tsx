@@ -11,6 +11,12 @@ import {
   FaHandshake,
   FaSignOutAlt,
   FaShoppingBag,
+  FaClock,
+  FaSyncAlt,
+  FaCheck,
+  FaTimesCircle,
+  FaUndoAlt,
+  FaRedoAlt,
 } from "react-icons/fa";
 
 import { getMe, logout } from "../../controllers/users.controllers";
@@ -29,10 +35,12 @@ interface UserProfile {
 interface Order {
   id: string;
   product: string;
+  serviceName?: string | null;
   quantity: number;
   url: string;
   value: number;
   createdAt: string;
+  status?: "AGUARDANDO" | "PROCESSANDO" | "CONCLUIDO" | "CANCELADO" | "REEMBOLSADO" | "REPOSTO";
 }
 
 const formatBRL = (v: number) =>
@@ -45,6 +53,26 @@ const formatDate = (iso: string) => {
     return iso;
   }
 };
+
+/* reaproveita o mesmo visual de status do dashboard (classes já vêm do Dashboard.css) */
+const ORDER_STATUS_META: Record<string, { label: string; className: string; icon?: React.ReactNode }> = {
+  AGUARDANDO:  { label: "Aguardando",  className: "zuno-dash-recent-status-aguardando",  icon: <FaClock /> },
+  PROCESSANDO: { label: "Processando", className: "zuno-dash-recent-status-processando", icon: <FaSyncAlt /> },
+  CONCLUIDO:   { label: "Concluído",   className: "zuno-dash-recent-status-concluido",   icon: <FaCheck /> },
+  CANCELADO:   { label: "Cancelado",   className: "zuno-dash-recent-status-cancelado",   icon: <FaTimesCircle /> },
+  REEMBOLSADO: { label: "Reembolsado", className: "zuno-dash-recent-status-reembolsado", icon: <FaUndoAlt /> },
+  REPOSTO:     { label: "Reposto",     className: "zuno-dash-recent-status-reposto",     icon: <FaRedoAlt /> },
+};
+
+function OrderStatusBadge({ status }: { status?: string }) {
+  const meta = ORDER_STATUS_META[status ?? "AGUARDANDO"] ?? ORDER_STATUS_META.AGUARDANDO;
+  return (
+    <span className={`zuno-dash-recent-status ${meta.className}`}>
+      {meta.icon}
+      {meta.label}
+    </span>
+  );
+}
 
 /** Fecha o painel quando o clique acontece fora do elemento referenciado */
 function useOutsideClose<T extends HTMLElement>(onClose: () => void) {
@@ -80,9 +108,9 @@ function HeaderMenu({ onLogout }: { onLogout: () => void }) {
       {open && (
         <div className="zuno-floating-panel zuno-dash-menu-panel">
           <span className="zuno-floating-arrow zuno-floating-arrow-left" />
-          <a href="/configuracoes" className="zuno-dash-menu-item">
+          {/* <a href="/configuracoes" className="zuno-dash-menu-item">
             <FaCog /> Configurações
-          </a>
+          </a> */}
           <a href="/afiliados" className="zuno-dash-menu-item">
             <FaHandshake /> Virar afiliado
           </a>
@@ -241,17 +269,36 @@ export default function Profile() {
             orders.map((order, i) => (
               <div
                 className="zuno-profile-item"
-                style={{ "--d": `${i * 70}ms` } as React.CSSProperties}
+                style={{ "--d": `${i * 30}ms` } as React.CSSProperties}
                 key={order.id}
               >
-                <span className="zuno-profile-item-icon">
-                  <FaShoppingBag />
-                </span>
-                <div className="zuno-profile-item-info">
-                  <b>{order.quantity} · {order.product}</b>
-                  <span>{formatDate(order.createdAt)}</span>
+                <div className="zuno-profile-item-top">
+                  <span className="zuno-profile-item-icon">
+                    <FaShoppingBag />
+                  </span>
+                  <span
+                    className="zuno-profile-item-name"
+                    title={order.serviceName ?? order.product}
+                  >
+                    {order.quantity} {order.serviceName ?? order.product}
+                  </span>
                 </div>
-                <span className="zuno-profile-item-value">{formatBRL(order.value)}</span>
+
+                <div className="zuno-profile-item-mid">
+                  <span className="zuno-profile-item-value">
+                    <FaWallet /> {formatBRL(order.value)}
+                  </span>
+                  <span className="zuno-profile-item-sep" />
+                  <OrderStatusBadge status={order.status} />
+                  <span className="zuno-profile-item-sep" />
+                  <span className="zuno-profile-item-date">{formatDate(order.createdAt)}</span>
+                </div>
+
+                <p className="zuno-profile-item-desc" title={order.url}>
+                  {order.url ? order.url : "(sem descrição)"}
+                </p>
+
+                <span className="zuno-profile-item-id">#{order.id}</span>
               </div>
             ))
           )}

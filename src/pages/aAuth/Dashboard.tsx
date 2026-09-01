@@ -71,6 +71,7 @@ interface NetworkOption {
   icon: ReactNode;
   placeholder: string;
   platformKey: string;
+  description: string | null; // 👈 novo
 }
 
 /* ============ usuário e pedidos reais (sem OrderItems) ============ */
@@ -110,12 +111,12 @@ const formatDate = (iso: string) => {
 };
 
 const ORDER_STATUS_META: Record<string, { label: string; className: string; icon?: ReactNode }> = {
-  AGUARDANDO:  { label: "Aguardando",  className: "zuno-dash-recent-status-aguardando",  icon: <FaClock /> },
+  AGUARDANDO: { label: "Aguardando", className: "zuno-dash-recent-status-aguardando", icon: <FaClock /> },
   PROCESSANDO: { label: "Processando", className: "zuno-dash-recent-status-processando", icon: <FaSyncAlt /> },
-  CONCLUIDO:   { label: "Concluído",   className: "zuno-dash-recent-status-concluido",   icon: <FaCheck /> },
-  CANCELADO:   { label: "Cancelado",   className: "zuno-dash-recent-status-cancelado",   icon: <FaTimesCircle /> },
+  CONCLUIDO: { label: "Concluído", className: "zuno-dash-recent-status-concluido", icon: <FaCheck /> },
+  CANCELADO: { label: "Cancelado", className: "zuno-dash-recent-status-cancelado", icon: <FaTimesCircle /> },
   REEMBOLSADO: { label: "Reembolsado", className: "zuno-dash-recent-status-reembolsado", icon: <FaUndoAlt /> },
-  REPOSTO:     { label: "Reposto",     className: "zuno-dash-recent-status-reposto",     icon: <FaRedoAlt /> },
+  REPOSTO: { label: "Reposto", className: "zuno-dash-recent-status-reposto", icon: <FaRedoAlt /> },
 };
 
 function OrderStatusBadge({ status }: { status?: string }) {
@@ -179,10 +180,11 @@ function buildNetworksFromProducts(products: ApiProduct[]): NetworkOption[] {
       const key = detectPlatformKey(p.name);
       return {
         id: p.id,
-        label: PLATFORM_LABELS[key] ?? p.name,
+        label: p.name,
         icon: PLATFORM_ICONS[key] ?? <FaShoppingBag />,
         placeholder: PLATFORM_PLACEHOLDERS[key] ?? "Cole aqui o link do perfil ou publicação",
         platformKey: key,
+        description: p.description ?? null, // 👈 novo
       };
     });
 }
@@ -262,9 +264,9 @@ function HeaderMenu() {
       {open && (
         <div className="zuno-floating-panel zuno-dash-menu-panel">
           <span className="zuno-floating-arrow zuno-floating-arrow-left" />
-          <a href="/configuracoes" className="zuno-dash-menu-item">
+          {/* <a href="/configuracoes" className="zuno-dash-menu-item">
             <FaCog /> Configurações
-          </a>
+          </a> */}
           <a href="/afiliados" className="zuno-dash-menu-item">
             <FaHandshake /> Virar afiliado
           </a>
@@ -689,7 +691,7 @@ export default function Dashboard() {
             <div className="zuno-dash-form-grid">
               {/* rede social */}
               <div className="zuno-dash-field">
-                <label className="zuno-dash-label">Rede social</label>
+                <label className="zuno-dash-label">Serviço de rede social</label>
                 <NetworkSelect networks={networks} value={network} onChange={handleNetworkChange} />
               </div>
 
@@ -701,9 +703,17 @@ export default function Dashboard() {
                   services={serviceOptions}
                   loading={serviceLoading}
                   value={service}
-                  onChange={(setService)}
+                  onChange={setService}
                 />
               </div>
+
+              {/* descrição da rede — largura total */}
+              {network?.description && (
+                <div className="zuno-dash-network-desc zuno-dash-field-full">
+                  <span className="zuno-dash-network-desc-icon">{network.icon}</span>
+                  <p>{network.description}</p>
+                </div>
+              )}
 
               {/* quadro explicativo */}
               <div className="zuno-dash-info zuno-dash-field-full">
