@@ -11,7 +11,6 @@ import {
   FaHome,
   FaUser,
   FaBars,
-  FaCog,
   FaHandshake,
   FaSignOutAlt,
   FaChartLine,
@@ -144,13 +143,6 @@ const PLATFORM_ICONS: Record<string, ReactNode> = {
   tiktok: <FaTiktok />,
   youtube: <FaYoutube />,
   telegram: <BsTelegram />,
-};
-
-const PLATFORM_LABELS: Record<string, string> = {
-  instagram: "Instagram",
-  tiktok: "TikTok",
-  youtube: "YouTube",
-  telegram: "Telegram",
 };
 
 const PLATFORM_PLACEHOLDERS: Record<string, string> = {

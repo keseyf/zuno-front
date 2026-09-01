@@ -4,7 +4,6 @@ import "../../styles/aAtuh/Dashboard.css";
 import "../../styles/aAtuh/Recharge.css";
 import {
   FaBars,
-  FaCog,
   FaHandshake,
   FaSignOutAlt,
   FaHome,
