@@ -7,7 +7,6 @@ import {
   FaHome,
   FaUser,
   FaBars,
-  FaCog,
   FaHandshake,
   FaSignOutAlt,
   FaShoppingBag,

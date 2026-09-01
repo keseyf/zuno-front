@@ -9,7 +9,6 @@ import PrivacyPolicy from "../pages/PrivacyPolicy.tsx";
 import Affiliates from "../pages/Affiliates.tsx";
 import Dashboard from "../pages/aAuth/Dashboard.tsx";
 import Profile from "../pages/aAuth/Profile.tsx";
-import Settings from "../pages/aAuth/Settings.tsx";
 import PrivateRoute from "../components/PrivateRoute.tsx";
 import Recharge from "../pages/aAuth/Recharge.tsx";
 
